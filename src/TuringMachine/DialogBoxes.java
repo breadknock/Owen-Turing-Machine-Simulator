@@ -2,8 +2,11 @@ package TuringMachine;
 
 import java.util.*;
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.*;
+
 
 /**
  * <p>
@@ -23,7 +26,7 @@ import java.awt.event.*;
  * @version 1.0
  */
 
-class NewTransitionDialog extends JDialog {
+class NewTransitionDialog extends JDialog implements ActionListener, DocumentListener {
   /**
 	 * 
 	 */
@@ -59,6 +62,11 @@ class NewTransitionDialog extends JDialog {
     directionPick.addItem( "Right" );
     directionPick.addItem( "NULL" );
     directionPick.setSelectedItem( "NULL" );
+    directionPick.setActionCommand("Direction");
+    directionPick.addActionListener(this);
+    
+    newCharText.setActionCommand("CharText");
+    newCharText.getDocument().addDocumentListener(this);
 
     if( edit ) {
       oldCharText.setText( String.valueOf( transition.oldChar ) );
@@ -188,6 +196,32 @@ class NewTransitionDialog extends JDialog {
       frameSize.height = screenHeight;
     }
     this.setLocation( x, y );
+  }
+  public void actionPerformed(ActionEvent e) {
+    if(e.getActionCommand().equals("Direction")) {
+      if(machineType.equals("Quadruple Machine")) {
+        if(directionPick.getSelectedItem().equals("NULL")) {
+        	newCharText.enable();
+        } else {
+        	newCharText.disable();
+        }
+      }
+    }
+  }
+  public void changedUpdate(DocumentEvent de) {
+	  if(machineType.equals("Quadruple Machine")) {
+  		if(newCharText.getText().equals("NULL")) {
+  			directionPick.setEnabled(true);
+  		} else {
+  			directionPick.setEnabled(false);
+  		}
+  	}
+  }
+  public void insertUpdate(DocumentEvent de) {
+	  changedUpdate(de);
+  }
+  public void removeUpdate(DocumentEvent de) {
+	  changedUpdate(de);
   }
 }
 

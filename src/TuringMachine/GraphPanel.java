@@ -612,7 +612,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
   }
 
   private String getNextNodeName() {
-      int i = states.getSize();
+      int i = states.size();
       while( nameAlreadyExists( String.valueOf( i ) ) ) {
           i++;
       }
