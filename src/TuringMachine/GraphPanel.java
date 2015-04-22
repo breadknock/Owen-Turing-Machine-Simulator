@@ -397,7 +397,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
       }
     }
     else if( graphtoolbar.selectionMode == GraphToolBar.INSERTSTATE ) {
-      addState( e.getX(), e.getY(), String.valueOf( states.size() ) );
+      addState( e.getX(), e.getY(), getNextNodeName() );
       pick = (State)states.lastElement();
     }
     else if( graphtoolbar.selectionMode == GraphToolBar.INSERTEDGE ) {
@@ -446,13 +446,14 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
     }
     else if( graphtoolbar.selectionMode == GraphToolBar.INSERTSTATE ) {
       if( pick != null ) {
+          //TODO: Find a way to change the state (double clicking)
         pick.x = e.getX();
         pick.y = e.getY();
-        NewStateDialog newState = new NewStateDialog( pick, states );
-        newState.pack();
-        newState.center();
-        newState.validate();
-        newState.setVisible( true );
+        //NewStateDialog newState = new NewStateDialog( pick, states );
+        //newState.pack();
+        //newState.center();
+        //newState.validate();
+        //newState.setVisible( true );
         pick = null;
       }
     }
@@ -603,6 +604,19 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
         && y > avey - h / 2 && y < avey + h / 2 )
       return true;
     return false;
+  }
+
+  //TODO implement method
+  private boolean nameAlreadyExists( String name ) {
+      return false;
+  }
+
+  private String getNextNodeName() {
+      int i = states.getSize();
+      while( nameAlreadyExists( String.valueOf( i ) ) ) {
+          i++;
+      }
+      return String.valueOf( i );
   }
 
   private void moveCamera( MouseEvent e ) {
