@@ -284,7 +284,7 @@ class TapeHeaderRenderer extends JLabel implements TableCellRenderer {
       boolean isSelected, boolean hasFocus, int row, int column ) {
     if( value.toString().equals( "-" ) )
       setIcon( new ImageIcon( TuringMachine.TuringMachineFrame.class
-          .getResource( "tapeindex.gif" ) ) );
+          .getResource( "/resources/tapeindex.gif" ) ) );
     else setIcon( null );
     
     setHorizontalAlignment(SwingConstants.CENTER);

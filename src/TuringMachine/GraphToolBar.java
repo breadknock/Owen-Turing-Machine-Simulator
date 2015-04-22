@@ -50,11 +50,11 @@ public class GraphToolBar extends JPanel {
     // setOrientation(VERTICAL);
 
     image1 = new ImageIcon( TuringMachine.TuringMachineFrame.class
-        .getResource( "select.gif" ) );
+        .getResource( "/resources/select.gif" ) );
     image2 = new ImageIcon( TuringMachine.TuringMachineFrame.class
-        .getResource( "insertstate.gif" ) );
+        .getResource( "/resources/insertstate.gif" ) );
     image3 = new ImageIcon( TuringMachine.TuringMachineFrame.class
-        .getResource( "insertedge.gif" ) );
+        .getResource( "/resources/insertedge.gif" ) );
     select.setIcon( image1 );
     select.setToolTipText( "Select" );
     insertState.setIcon( image2 );
