@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="jar" name="Create Runnable Jar for Turing Machine">
+
+    <!-- ANT 1.7 is required -->
+
+
+    <property name="jarname" value="TuringMachine3.jar" />
+
+    <!-- remove all build files -->
+	<target name="clean">
+		<delete dir="bin"/>
+        <delete file="${jarname}"/>
+	</target>
+	
+
+    <!-- build all .class files, except jUnit tests -->
+    <target name="compile">
+		<mkdir dir="bin"/>
+        <copy todir="bin/resources">
+            <fileset dir="src/resources" />
+        </copy>
+		<javac srcdir="src" destdir="bin" includeantruntime="false">
+		</javac>
+	</target>
+	
+    <!-- output executable jar file -->
+	<target name="jar" depends="compile">
+		<jar destfile="${jarname}" basedir="bin">
+			<manifest>
+	            <attribute name="Main-Class" value="TuringMachine.TuringMachineApp"/>
+                <attribute name="Class-Path" value="."/>
+			</manifest>
+		</jar>
+	</target>
+
+
+</project>

@@ -1,0 +1,50 @@
+Ver 3.1 Changes
+Christopher French
+5/01/2012
+
+Changes:
+    Changed Save Tape to save more than 1000 characters if the tape has been extended.
+            Tape files from Ver 2.0 and earlier no longer supported.
+    Changed Save Execution to look at more than 1000 characters if the tape has been extended.
+    Removed ability to resize tape cells.
+    Increased size of tape cells to fit any valid character.
+    Centered text in tape cells.
+    Limited the number of characters in a tape cell to 1
+    Added validation for manual tape input
+        Sets cell values to the last character typed into the cell
+        If the character is not valid input, the cell is set to blank (i.e. 0)
+    Added an editor each tape cell
+        When clicked, the previous contents are cleared.
+        When the cell is typed in, the input is sent to the validator and the cell is set to the returned value.
+        If the cell is deselected without entering anything, the previous contents are restored.
+    Added functionality to deselected the currently selected tape cell when certain features are used 
+        e.g. Load input string, Clear tape, Save tape, Start, etc.
+    Removed ability to manually edit the tape while the machine is running. 
+    When tape is cleared, the tape pointer is now centered on the tape to reduce the need to allocate more tape cells.
+    Added the ability to set the tape pointer position by typing "^" into the cell.
+    Added the ability to set the starting tape pointer position by surrounding the character in the input with [].
+        Works for both single and multiple inputs.
+        Also added relevant input validators.
+    Add [] to indicate the pointer position in the multiple execution output.
+    Changed straight transition lines to curved lines.
+    Added the ability to drag transition labels along the curved lines.
+    Changes the file selection window so it remembers what directory you opened/saved files in.
+    
+
+Bug Fixes:
+    Fixed a bug where the entire tape panel would be highlighted when clicked.
+    Fixed a bug where columns added to ends of the tape would all have the same value even when one was changed.
+    Fixed a bug where transition labels would jump when the transition line was exactly vertical.
+    Fixed a bug where the Multiple Inputs window was stopping machine execution when the machine wasn't running.
+    Fixed a bug where it was possible to get the transition labels stuck beneath the state labels.
+    
+
+Known Issues:
+    Rapidly scrolling through the Tape Panel during execution can occasionally cause the Tape Panel to display incorrectly
+        Priority: High   This issue can interrupt execution and requires the program to be restarted to be resolved
+        This can occur during normal execution of Turing Machines which force the Tape Panel to scroll.
+        Has been observed to occur in Ver 1.0 and later.  
+    Message window will occasionally fail to scroll to bottom when new text is added.
+        Priority: Low    Little effect on program usability
+        Can occur when the Multiple Inputs window is closed
+        Has been observed to occur in Ver 2.0 and later.
