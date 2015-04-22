@@ -9,7 +9,9 @@ Currently planned changes:
 - Reset / rewrite machine
 - disable quadruple machine field when one is filled
 - fix numbering system
+    - reorganize window
 - don't pop window when node is inserted
+    - add ability to double click to change node name
 - reset button (rest machine and load)
 - shortcut buttons
 
