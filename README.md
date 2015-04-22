@@ -1,6 +1,9 @@
-Planned changes:
+A simple Turing Machine Simulator
 
-- Create build.xml, jarfile, git repository, reorganize, batch file, organize e'rything
+Continued from the previous project by Owen F. Kellett, Matthew, Christopher French
+
+Currently planned changes:
+
 - Manually move r/w head 
 - Documentation
 - Reset / rewrite machine
@@ -11,3 +14,5 @@ Planned changes:
 - shortcut buttons
 
 Planned release date: May 8th
+
+Build instructions: this project uses Ant to create an executable .jar file
