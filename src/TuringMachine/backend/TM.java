@@ -1,92 +1,10 @@
-package TuringMachine;
+package backend;
 
 import java.util.*;
 import javax.swing.*;
 import javax.swing.table.*;
 import java.io.*;
 
-class State implements Serializable {
-  private static final long serialVersionUID = 7903724405884412505L;
-  double x;
-  double y;
-  String stateName;
-
-  boolean finalState;
-  boolean currentState;
-  boolean startState;
-
-  boolean highlight = false;
-
-  public State( double x, double y, String name, boolean f ) {
-    this.x = x;
-    this.y = y;
-    finalState = f;
-    currentState = false;
-    startState = false;
-    stateName = name;
-  }
-}
-
-class Edge {
-  State fromState;
-  State toState;
-
-  char oldChar = 0;
-  char newChar = 0;
-  int direction = 0;
-
-  boolean currentEdge = false;
-  boolean highlight = false;
-
-  double shiftLabel = 0;
-
-  public Edge( State from, State to ) {
-    fromState = from;
-    toState = to;
-  }
-
-  String label() {
-    String temp = new String();
-    if( oldChar != 0 ) temp = new String( String.valueOf( oldChar ) );
-    if( newChar != 0 ) {
-      temp = temp.concat( ", " );
-      temp = temp.concat( String.valueOf( newChar ) );
-    }
-    if( direction != TM.NULL ) {
-      temp = temp.concat( ", " );
-      if( direction == TM.LEFT )
-        temp = temp.concat( "Left" );
-      else if( direction == TM.RIGHT )
-        temp = temp.concat( "Right" );
-      else temp = temp.concat( "Stay" );
-    }
-    return temp;
-  }
-
-  String listLabel() {
-    String temp = new String( "(" );
-    temp = temp.concat( fromState.stateName );
-    temp = temp.concat( ", " );
-    temp = temp.concat( String.valueOf( oldChar ) );
-    temp = temp.concat( ")  " );
-    temp = temp.concat( "(" );
-    temp = temp.concat( toState.stateName );
-    if( newChar != 0 ) {
-      temp = temp.concat( ", " );
-      temp = temp.concat( String.valueOf( newChar ) );
-    }
-    if( direction != TM.NULL ) {
-      temp = temp.concat( ", " );
-      if( direction == TM.LEFT )
-        temp = temp.concat( "Left" );
-      else if( direction == TM.RIGHT )
-        temp = temp.concat( "Right" );
-      else temp = temp.concat( "Stay" );
-    }
-    temp = temp.concat( ")" );
-    return temp;
-  }
-}
 
 class TM implements Runnable {
   // transition results
@@ -125,7 +43,7 @@ class TM implements Runnable {
   State currentState;
   Edge currentEdge;
   @SuppressWarnings( "unchecked" )
-  Vector states;
+  Vector<State> states;
   DefaultListModel transitions;
   MessagePanel messages;
   TransitionsPane transitionpanel;
@@ -146,8 +64,8 @@ class TM implements Runnable {
     this.transitions = transitions;
   }
 
-  @SuppressWarnings( "unchecked" )
-  public void setStates( Vector states ) {
+  //@SuppressWarnings( "unchecked" )
+  public void setStates( Vector<State> states ) {
     this.states = states;
   }
 
@@ -190,23 +108,23 @@ class TM implements Runnable {
   }
 
   public boolean validTapeChar( char ch ) {
-    return( miscUtil.isLetterOrDigit( ch ) || " +/*-!@#$%&()=,.[]".indexOf( ch ) > -1 );
+    return( Character.isLetterOrDigit( ch ) || " +/*-!@#$%&()=,.[]".indexOf( ch ) > -1 );
   }
 
-  @SuppressWarnings( "unchecked" )
+  //@SuppressWarnings( "unchecked" )
   public boolean initMachine( int initPos, String initChars,
       StringBuffer errorMsg ) {
 
     this.initPos = initPos;
     // int numChars = initChars.length();
-    Vector tapeIndicator = new Vector();
-    Vector tapeData = new Vector();
+    Vector<Character> tapeIndicator = new Vector<Character>();
+    Vector<Character> tapeData = new Vector<Character>();
     for( int i = 0; i < TAPESIZE; i++ ) {
       tapeIndicator.add( new Character( '0' ) );
       tapeData.add( new Character( DEFAULTCHAR ) );
     }
     tapeIndicator.setElementAt( new Character( '-' ), initPos );
-    Vector tapeData2 = new Vector();
+    Vector<Vector<Character>> tapeData2 = new Vector<Vector<Character>>();
     tapeData2.add( tapeData );
     tapemodel.setDataVector( tapeData2, tapeIndicator );
     tape = new TapeTable( tapemodel , this);
@@ -361,7 +279,7 @@ class TM implements Runnable {
     String temp = new String();
     if( currentState == null ) {
       if( states.size() > 0 )
-        setState( (State)states.elementAt( 0 ) );
+        setState( states.elementAt( 0 ) );
       else {
         go = false;
         // reachedHaltingState = false;
@@ -437,14 +355,5 @@ class TM implements Runnable {
     // reachedHaltingState=false;
     go = false;
     return temp.concat( "No applicable transition found\nMachine halted" );
-  }
-}
-
-class miscUtil {
-
-  public static boolean isLetterOrDigit( char ch ) { // for Java 1.0
-    String list = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-        + "0123456789";
-    return( list.indexOf( ch ) > -1 );
   }
 }
