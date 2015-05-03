@@ -15,6 +15,8 @@ Currently planned changes:
 - reset button (rest machine and load)
 - shortcut buttons
 + Create new Turing Machine
+- Show number of states and transitions
+- Show number transitions when doing multiple inputs
 
 Planned release date: May 15th
 
