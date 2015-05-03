@@ -107,7 +107,7 @@ public class TM implements Runnable {
   }
 
   public boolean validTapeChar( char ch ) {
-    return( miscUtil.isLetterOrDigit( ch ) || " +/*-!@#$%&()=,.[]".indexOf( ch ) > -1 );
+    return( Character.isLetterOrDigit( ch ) || " +/*-!@#$%&()=,.[]".indexOf( ch ) > -1 );
   }
 
   @SuppressWarnings( "unchecked" )
