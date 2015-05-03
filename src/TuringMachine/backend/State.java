@@ -2,7 +2,7 @@ package backend;
 
 import java.io.*;
 
-class State implements Serializable {
+public class State implements Serializable {
   private static final long serialVersionUID = 7903724405884412505L;
   double x;
   double y;

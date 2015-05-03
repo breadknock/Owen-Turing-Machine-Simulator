@@ -1,21 +1,29 @@
 package backend;
 
-class Edge {
-  State fromState;
-  State toState;
+public class Edge {
+  public State fromState;
+  public State toState;
 
-  char oldChar = 0;
-  char newChar = 0;
-  int direction = 0;
+  public char oldChar = 0;
+  public char newChar = 0;
+  public int direction = 0;
 
-  boolean currentEdge = false;
-  boolean highlight = false;
+  public boolean currentEdge = false;
+  public boolean highlight = false;
 
-  double shiftLabel = 0;
+  public double shiftLabel = 0;
 
   public Edge( State from, State to ) {
     fromState = from;
     toState = to;
+  }
+
+  public State getFromState() {
+      return fromState;
+  }
+
+  public State getToState() {
+      return toState;
   }
 
   String label() {

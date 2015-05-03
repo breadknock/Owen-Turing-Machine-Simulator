@@ -6,7 +6,7 @@ import javax.swing.table.*;
 import java.io.*;
 
 
-class TM implements Runnable {
+public class TM implements Runnable {
   // transition results
   public static final int SUCCESS = 0, HALTED = -1, NOTFOUND = -2,
       ABNORMAL = -3, NOPROG = -4, USERINT = -5;
