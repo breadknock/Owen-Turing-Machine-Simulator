@@ -80,7 +80,8 @@ public class MessagePanel extends JPanel {
     buttonpanel.add( speedLabel );
     buttonpanel.add( speed );
 
-    JButton reset = new JButton( "Reset Machine" ), 
+    JButton resetAll = new JButton( "Reset All State"),
+            reset = new JButton( "Reset Machine" ), 
             clearTape = new JButton( "Clear Tape" ), 
             loadInput = new JButton( "Load Input String" ), 
             multipleInputs = new JButton( "Multiple Inputs" );
@@ -106,6 +107,7 @@ public class MessagePanel extends JPanel {
     optionspanel.add( machineType );
     optionspanel.add( loadInput );
     optionspanel.add( inputString );
+    optionspanel.add( resetAll );
     optionspanel.add( multipleInputs );
     optionspanel.setPreferredSize( new Dimension( 310, 150 ) );
 
@@ -189,31 +191,102 @@ public class MessagePanel extends JPanel {
       }
     } );
 
+    resetAll.addActionListener( new ActionListener() {
+        public void actionPerformed( ActionEvent e ) {
+            resetMachineAction();
+            clearTapeAction();
+            loadInputAction();
+        }
+        });
+
     reset.addActionListener( new ActionListener() {
       public void actionPerformed( ActionEvent e ) {
-        for( int i = 0; i < machine.states.size(); i++ ) {
-          State n = (State)machine.states.elementAt( i );
-          n.currentState = false;
-          if( n.startState ) {
-            n.currentState = true;
-            machine.currentState = n;
-          }
-        }
-        machine.currentEdge = null;
-        for( int i = 0; i < machine.transitions.size(); i++ ) {
-          Edge n = (Edge)machine.transitions.elementAt( i );
-          n.currentEdge = false;
-        }
-        machine.totalTransitions = 0;
-        updateLabels( machine.nonBlanks, machine.totalTransitions );
-//        machine.leftMost = machine.tapePos;
-//        machine.rightMost = machine.tapePos;
-        addMessage( "Machine Reset" );
+        resetMachineAction();
       }
     } );
 
     clearTape.addActionListener( new ActionListener() {
       public void actionPerformed( ActionEvent e ) {
+        clearTapeAction();
+      }
+    } );
+
+    loadInput.addActionListener( new ActionListener() {
+      public void actionPerformed( ActionEvent e ) {
+        loadInputAction();
+      }
+    } );
+    /*
+     * pops up window, window has textfields for user to enter tape entries, and
+     * a run button that sets the output textfields to what is left on the tape
+     * after the inputs are run.
+     */
+    multipleInputs.addActionListener( new ActionListener() {
+      public void actionPerformed( ActionEvent e ) {
+      	machine.tape.editCellAt(-1, -1);
+      	machine.tape.clearSelection();
+        miWindow.setMachine( machine );
+        miWindow.setThread( execution );
+        miWindow.setVisible( true );
+      }
+    } );
+  }
+
+  public void loadInputAction() {
+      int left = 0;
+      int leftpos = -1;
+      int right = 0;
+      int rightpos = -1;
+      int start;
+      String temp1;
+      String input = inputString.getText();
+     machine.tape.editCellAt(-1, -1);
+     machine.tape.clearSelection();
+    for(int i = 0; i < input.length(); i++)
+    {
+        if(!machine.validTapeChar(input.charAt(i)))
+        {
+            addMessage( "Tape input contains invalid characters" );
+            return;
+        }
+        if(input.charAt(i) == '[')
+        {
+            left++;
+            if(leftpos < 0)
+                leftpos = i;
+        }
+        if(input.charAt(i) == ']')
+        {
+            right++;
+            if(rightpos < 0)
+                rightpos = i;
+        }
+    }
+    if(!((left == 0 && right == 0) || (left == 1 && right == 1)))
+    {
+        addMessage( "Improper use of []" );
+        return;
+    }
+    if(left == 0)
+        start = 0;
+    else
+    {
+        if(rightpos - leftpos != 2)
+        {
+            addMessage( "Improper use of []" );
+            return;
+        }
+        start = leftpos;
+        temp1 = input.substring(0,leftpos) + input.substring(leftpos+1, rightpos) + input.substring(rightpos+1);
+        input = temp1;
+    }
+    machine.loadInputString( input, start);
+    addMessage( input.concat( " loaded onto tape" ) );
+    updateLabels( machine.nonBlanks, machine.totalTransitions );
+
+  }
+
+  public void clearTapeAction() {
      	 machine.tape.editCellAt(-1, -1);
      	 machine.tape.clearSelection();
 	  for( int j = 0; j < machine.tape.getColumnCount(); j++ ) {
@@ -235,77 +308,29 @@ public class MessagePanel extends JPanel {
         updateLabels( machine.nonBlanks, machine.totalTransitions );
 	
         addMessage( "Tape Cleared" );
-      }
-    } );
 
-    loadInput.addActionListener( new ActionListener() {
-      public void actionPerformed( ActionEvent e ) {
-    	  int left = 0;
-    	  int leftpos = -1;
-    	  int right = 0;
-    	  int rightpos = -1;
-    	  int start;
-    	  String temp1;
-    	  String input = inputString.getText();
-      	 machine.tape.editCellAt(-1, -1);
-      	 machine.tape.clearSelection();
-    	for(int i = 0; i < input.length(); i++)
-    	{
-    		if(!machine.validTapeChar(input.charAt(i)))
-    		{
-    			addMessage( "Tape input contains invalid characters" );
-    			return;
-    		}
-    		if(input.charAt(i) == '[')
-    		{
-    			left++;
-    			if(leftpos < 0)
-    				leftpos = i;
-    		}
-    		if(input.charAt(i) == ']')
-    		{
-    			right++;
-    			if(rightpos < 0)
-    				rightpos = i;
-    		}
-    	}
-    	if(!((left == 0 && right == 0) || (left == 1 && right == 1)))
-    	{
-    		addMessage( "Impropper use of []" );
-    		return;
-    	}
-    	if(left == 0)
-    		start = 0;
-    	else
-    	{
-    		if(rightpos - leftpos != 2)
-    		{
-    			addMessage( "Impropper use of []" );
-    			return;
-    		}
-    		start = leftpos;
-    		temp1 = input.substring(0,leftpos) + input.substring(leftpos+1, rightpos) + input.substring(rightpos+1);
-    		input = temp1;
-    	}
-        machine.loadInputString( input, start);
-        addMessage( input.concat( " loaded onto tape" ) );
+  }
+
+  public void resetMachineAction() {
+        for( int i = 0; i < machine.states.size(); i++ ) {
+          State n = (State)machine.states.elementAt( i );
+          n.currentState = false;
+          if( n.startState ) {
+            n.currentState = true;
+            machine.currentState = n;
+          }
+        }
+        machine.currentEdge = null;
+        for( int i = 0; i < machine.transitions.size(); i++ ) {
+          Edge n = (Edge)machine.transitions.elementAt( i );
+          n.currentEdge = false;
+        }
+        machine.totalTransitions = 0;
         updateLabels( machine.nonBlanks, machine.totalTransitions );
-      }
-    } );
-    /*
-     * pops up window, window has textfields for user to enter tape entries, and
-     * a run button that sets the output textfields to what is left on the tape
-     * after the inputs are run.
-     */
-    multipleInputs.addActionListener( new ActionListener() {
-      public void actionPerformed( ActionEvent e ) {
-      	machine.tape.editCellAt(-1, -1);
-      	machine.tape.clearSelection();
-        miWindow.setMachine( machine );
-        miWindow.setThread( execution );
-        miWindow.setVisible( true );
-      }
-    } );
+//        machine.leftMost = machine.tapePos;
+//        machine.rightMost = machine.tapePos;
+        addMessage( "Machine Reset" );
+
   }
 
   public void setMachine( TM machine ) {
