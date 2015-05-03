@@ -6,14 +6,14 @@ Currently planned changes:
 
 - Manually move r/w head 
 - Documentation
-+ Reset / rewrite machine button
-+ disable quadruple machine field when one is filled
-+ fix numbering system
-    + reorganize right-hand window
-+ don't pop window when node is inserted
-    + add ability to double click to change node name
++ ~~Reset / rewrite machine button~~
++ ~~disable quadruple machine field when one is filled~~
++ ~~fix numbering system~~
+    + ~~reorganize right-hand window~~
++ ~~don't pop window when node is inserted~~
+    + ~~add ability to double click to change node name~~
 - shortcut buttons
-+ Create new Turing Machine
++ ~~Create new Turing Machine~~
 - Show number of states and transitions
 - Show number transitions when doing multiple inputs
 
