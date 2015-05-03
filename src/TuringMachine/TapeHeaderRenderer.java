@@ -129,26 +129,35 @@ import javax.swing.table.*;
  * public Dimension getPreferredSize() { return new Dimension(MINW, MINH); } }
  */
 
-public class TapePanel extends JScrollPane {
+public class TapeHeaderRenderer extends JLabel implements TableCellRenderer {
   /**
 	 * 
 	 */
   private static final long serialVersionUID = 1L;
 
-  public TapePanel() {
-    super();
+  public TapeHeaderRenderer() {
+    setOpaque( true );
   }
 
-  public TapePanel( JTable tape ) {
-    super( tape );
-  }
+  public Component getTableCellRendererComponent( JTable table, Object value,
+      boolean isSelected, boolean hasFocus, int row, int column ) {
+    if( value.toString().equals( "-" ) )
+      setIcon( new ImageIcon( TuringMachine.TuringMachineFrame.class
+          .getResource( "/resources/tapeindex.gif" ) ) );
+    else setIcon( null );
+    
+    setHorizontalAlignment(SwingConstants.CENTER);
+    
+    if( isSelected ) {
+      setBackground( table.getSelectionBackground() );
+      setForeground( table.getSelectionForeground() );
+    }
+    else {
+      setBackground( table.getBackground() );
+      setForeground( table.getForeground() );
+    }
 
-  public Dimension getMinimumSize() {
-    return new Dimension( 500, 75 );
-  }
-
-  public Dimension getPreferredSize() {
-    return new Dimension( 500, 75 );
+    return this;
   }
 }
 

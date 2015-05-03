@@ -129,26 +129,68 @@ import javax.swing.table.*;
  * public Dimension getPreferredSize() { return new Dimension(MINW, MINH); } }
  */
 
-public class TapePanel extends JScrollPane {
-  /**
-	 * 
-	 */
-  private static final long serialVersionUID = 1L;
+public class TapeEditor extends JTextField implements TableCellEditor
+{
+    private CellEditorListener cellEditorListener  = null;
+    private String old;
 
-  public TapePanel() {
-    super();
-  }
+    // Start editing
+    @Override
+    public Component getTableCellEditorComponent(JTable table, Object obj, boolean isSelected, int row, int column)
+    {
+    	old = obj.toString();
+        super.setText("");
+        setBackground( table.getBackground() );
+        setForeground( table.getForeground() );
+          
+        return this;
+    }
 
-  public TapePanel( JTable tape ) {
-    super( tape );
-  }
+    // Retrieve e dited value
+    @Override
+    public Object getCellEditorValue()
+    {
+    	if(super.getText().equals(""))
+    	{
+    		return old;
+    	}
+        return super.getText();
+    }
 
-  public Dimension getMinimumSize() {
-    return new Dimension( 500, 75 );
-  }
+    @Override
+    public boolean isCellEditable(EventObject e)
+    {
+        return true;
+    }
 
-  public Dimension getPreferredSize() {
-    return new Dimension( 500, 75 );
-  }
+    @Override
+    public boolean shouldSelectCell(EventObject e)
+    {
+        return true;
+    }
+
+    @Override
+    public boolean stopCellEditing()
+    {
+        cellEditorListener.editingStopped(new ChangeEvent(this));
+        return true;
+    }
+
+    @Override
+    public void cancelCellEditing()
+    {
+        cellEditorListener.editingCanceled(new ChangeEvent(this));
+    }
+
+    @Override
+    public void addCellEditorListener(CellEditorListener celleditorlistener)
+    {
+        cellEditorListener = celleditorlistener;
+    }
+
+    @Override
+    public void removeCellEditorListener(CellEditorListener celleditorlistener)
+    {
+        if (cellEditorListener == cellEditorListener) cellEditorListener = null;
+    }
 }
-

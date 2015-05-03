@@ -129,26 +129,19 @@ import javax.swing.table.*;
  * public Dimension getPreferredSize() { return new Dimension(MINW, MINH); } }
  */
 
-public class TapePanel extends JScrollPane {
+public class TapeTableModel extends DefaultTableModel {
   /**
 	 * 
 	 */
   private static final long serialVersionUID = 1L;
 
-  public TapePanel() {
+  public TapeTableModel() {
     super();
   }
 
-  public TapePanel( JTable tape ) {
-    super( tape );
-  }
+  public void setColumnName( Object value, int col ) {
 
-  public Dimension getMinimumSize() {
-    return new Dimension( 500, 75 );
-  }
-
-  public Dimension getPreferredSize() {
-    return new Dimension( 500, 75 );
+    // columnIdentifiers.setElementAt(value, col);
   }
 }
 

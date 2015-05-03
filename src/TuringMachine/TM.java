@@ -5,90 +5,7 @@ import javax.swing.*;
 import javax.swing.table.*;
 import java.io.*;
 
-class State implements Serializable {
-  private static final long serialVersionUID = 7903724405884412505L;
-  double x;
-  double y;
-  String stateName;
-
-  boolean finalState;
-  boolean currentState;
-  boolean startState;
-
-  boolean highlight = false;
-
-  public State( double x, double y, String name, boolean f ) {
-    this.x = x;
-    this.y = y;
-    finalState = f;
-    currentState = false;
-    startState = false;
-    stateName = name;
-  }
-}
-
-class Edge {
-  State fromState;
-  State toState;
-
-  char oldChar = 0;
-  char newChar = 0;
-  int direction = 0;
-
-  boolean currentEdge = false;
-  boolean highlight = false;
-
-  double shiftLabel = 0;
-
-  public Edge( State from, State to ) {
-    fromState = from;
-    toState = to;
-  }
-
-  String label() {
-    String temp = new String();
-    if( oldChar != 0 ) temp = new String( String.valueOf( oldChar ) );
-    if( newChar != 0 ) {
-      temp = temp.concat( ", " );
-      temp = temp.concat( String.valueOf( newChar ) );
-    }
-    if( direction != TM.NULL ) {
-      temp = temp.concat( ", " );
-      if( direction == TM.LEFT )
-        temp = temp.concat( "Left" );
-      else if( direction == TM.RIGHT )
-        temp = temp.concat( "Right" );
-      else temp = temp.concat( "Stay" );
-    }
-    return temp;
-  }
-
-  String listLabel() {
-    String temp = new String( "(" );
-    temp = temp.concat( fromState.stateName );
-    temp = temp.concat( ", " );
-    temp = temp.concat( String.valueOf( oldChar ) );
-    temp = temp.concat( ")  " );
-    temp = temp.concat( "(" );
-    temp = temp.concat( toState.stateName );
-    if( newChar != 0 ) {
-      temp = temp.concat( ", " );
-      temp = temp.concat( String.valueOf( newChar ) );
-    }
-    if( direction != TM.NULL ) {
-      temp = temp.concat( ", " );
-      if( direction == TM.LEFT )
-        temp = temp.concat( "Left" );
-      else if( direction == TM.RIGHT )
-        temp = temp.concat( "Right" );
-      else temp = temp.concat( "Stay" );
-    }
-    temp = temp.concat( ")" );
-    return temp;
-  }
-}
-
-class TM implements Runnable {
+public class TM implements Runnable {
   // transition results
   public static final int SUCCESS = 0, HALTED = -1, NOTFOUND = -2,
       ABNORMAL = -3, NOPROG = -4, USERINT = -5;
@@ -440,11 +357,3 @@ class TM implements Runnable {
   }
 }
 
-class miscUtil {
-
-  public static boolean isLetterOrDigit( char ch ) { // for Java 1.0
-    String list = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-        + "0123456789";
-    return( list.indexOf( ch ) > -1 );
-  }
-}

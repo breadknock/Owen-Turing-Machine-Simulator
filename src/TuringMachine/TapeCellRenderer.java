@@ -129,26 +129,23 @@ import javax.swing.table.*;
  * public Dimension getPreferredSize() { return new Dimension(MINW, MINH); } }
  */
 
-public class TapePanel extends JScrollPane {
-  /**
-	 * 
-	 */
-  private static final long serialVersionUID = 1L;
+public class TapeCellRenderer extends DefaultTableCellRenderer {
+	  /**
+		 * 
+		 */
+	  private static final long serialVersionUID = 1L;
 
-  public TapePanel() {
-    super();
-  }
+	  public TapeCellRenderer() {
+	    setOpaque( true );
+	  }
 
-  public TapePanel( JTable tape ) {
-    super( tape );
-  }
+	  public Component getTableCellRendererComponent( JTable table, Object value,
+	      boolean isSelected, boolean hasFocus, int row, int column ) {
+	    super.getTableCellRendererComponent(table, value, false, hasFocus, row, column);
+	    this.setToolTipText("Enter ^ to set the pointer location");
+	    setHorizontalAlignment(SwingConstants.CENTER);
+	    return this;
+	  }
+	}
 
-  public Dimension getMinimumSize() {
-    return new Dimension( 500, 75 );
-  }
-
-  public Dimension getPreferredSize() {
-    return new Dimension( 500, 75 );
-  }
-}
 
