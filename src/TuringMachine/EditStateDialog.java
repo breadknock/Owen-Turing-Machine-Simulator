@@ -85,7 +85,9 @@ public class EditStateDialog extends JDialog {
       if( ( s.currentState ) ) current = true;
       if( ( s.startState ) ) start = true;
       if( s.stateName.equals(stateText.getText())) {
-        //Dialog Box error
+        WarningBox wb = new WarningBox("Error: This state name is already taken",this);
+        wb.validate();
+        wb.setVisible(true);
         return false;
       }
     }
