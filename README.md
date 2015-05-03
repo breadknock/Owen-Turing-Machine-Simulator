@@ -12,7 +12,6 @@ Currently planned changes:
     - reorganize right-hand window
 + don't pop window when node is inserted
     + add ability to double click to change node name
-- reset button (rest machine and load)
 - shortcut buttons
 + Create new Turing Machine
 - Show number of states and transitions
