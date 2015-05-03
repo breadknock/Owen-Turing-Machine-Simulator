@@ -6,10 +6,10 @@ Currently planned changes:
 
 - Manually move r/w head 
 - Documentation
-- Reset / rewrite machine button
++ Reset / rewrite machine button
 + disable quadruple machine field when one is filled
 + fix numbering system
-    - reorganize right-hand window
+    + reorganize right-hand window
 + don't pop window when node is inserted
     + add ability to double click to change node name
 - shortcut buttons
