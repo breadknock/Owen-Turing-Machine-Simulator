@@ -8,12 +8,13 @@ Currently planned changes:
 - Documentation
 - Reset / rewrite machine button
 + disable quadruple machine field when one is filled
-- fix numbering system
++ fix numbering system
     - reorganize right-hand window
 + don't pop window when node is inserted
     + add ability to double click to change node name
 - reset button (rest machine and load)
 - shortcut buttons
+- Create new Turing Machine
 
 Planned release date: May 15th
 

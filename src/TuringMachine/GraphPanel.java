@@ -624,11 +624,16 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
 
   //TODO implement method
   private boolean nameAlreadyExists( String name ) {
+      for(State s : states) {
+          if(s.stateName.equals(name)) {
+              return true;
+          }
+      }
       return false;
   }
 
   private String getNextNodeName() {
-      int i = states.size();
+      int i = 0; //states.size();
       while( nameAlreadyExists( String.valueOf( i ) ) ) {
           i++;
       }
