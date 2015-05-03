@@ -15,6 +15,6 @@ Currently planned changes:
 - reset button (rest machine and load)
 - shortcut buttons
 
-Planned release date: May 8th
+Planned release date: May 15th
 
 Build instructions: this project uses Ant to create an executable .jar file
