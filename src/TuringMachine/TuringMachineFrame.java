@@ -394,7 +394,7 @@ public class TuringMachineFrame extends JFrame {
           case JOptionPane.YES_OPTION :
             SaveProgressDialog progressIndicator = new SaveProgressDialog(Integer.valueOf(filechooser.maximum.getText()).intValue(), this);
             progressIndicator.validate();
-            progressIndicator.show();
+            progressIndicator.setVisible(true);
             machine.machine.setSpeed("Compute");
             ExecutionSaver saveNow = new ExecutionSaver(newSelect, Integer.valueOf(filechooser.maximum.getText()).intValue(), progressIndicator, machine.graphpanel);
             saveNow.start();
@@ -407,7 +407,7 @@ public class TuringMachineFrame extends JFrame {
       {
         SaveProgressDialog progressIndicator = new SaveProgressDialog(Integer.valueOf(filechooser.maximum.getText()).intValue(), this);
         progressIndicator.validate();
-        progressIndicator.show();
+        progressIndicator.setVisible(true);
         machine.machine.setSpeed("Compute");
         ExecutionSaver saveNow = new ExecutionSaver(newSelect, Integer.valueOf(filechooser.maximum.getText()).intValue(), progressIndicator, machine.graphpanel);
         saveNow.start();
@@ -427,7 +427,7 @@ public class TuringMachineFrame extends JFrame {
     dlg.setLocation((frmSize.width - dlgSize.width) / 2 + loc.x, (frmSize.height - dlgSize.height) / 2 + loc.y);
     dlg.setModal(true);
     dlg.pack();
-    dlg.show();
+    dlg.setVisible(true);
   }
 
   /**

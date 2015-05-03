@@ -20,6 +20,7 @@
             <fileset dir="src/resources" />
         </copy>
 		<javac srcdir="src" destdir="bin" includeantruntime="false">
+        <compilerarg value="-Xlint:deprecation"/>
 		</javac>
 	</target>
 	

@@ -201,9 +201,9 @@ public class NewTransitionDialog extends JDialog implements ActionListener, Docu
     if(e.getActionCommand().equals("Direction")) {
       if(machineType.equals("Quadruple Machine")) {
         if(directionPick.getSelectedItem().equals("NULL")) {
-        	newCharText.enable();
+        	newCharText.setEnabled(true);
         } else {
-        	newCharText.disable();
+        	newCharText.setEnabled(false);
         }
       }
     }
