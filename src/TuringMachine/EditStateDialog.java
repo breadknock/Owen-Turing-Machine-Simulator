@@ -26,7 +26,7 @@ import java.awt.event.*;
  * @version 1.0
  */
 
-public class NewStateDialog extends JDialog {
+public class EditStateDialog extends JDialog {
   /**
 	 * 
 	 */
@@ -38,14 +38,15 @@ public class NewStateDialog extends JDialog {
   JButton ok = new JButton( "OK" );
   JButton cancel = new JButton( "Cancel" );
   State newState;
-  Vector<?> states;
+  Vector<State> states;
 
-  NewStateDialog( State newState, Vector<?> states ) {
+  EditStateDialog( State newState, Vector<State> states ) {
     this.newState = newState;
     this.states = states;
+    halt.setSelected(newState.finalState);
     Container mypane = getContentPane();
     mypane.setLayout( new GridLayout( 3, 2, 0, 0 ) );
-    setTitle( "New State Settings" );
+    setTitle( "Edit State Settings" );
 
     stateText.setText( newState.stateName );
     mypane.add( stateName );
@@ -58,32 +59,43 @@ public class NewStateDialog extends JDialog {
     ok.addActionListener( new ActionListener() {
       public void actionPerformed( ActionEvent e ) {
         if( stateText.getText().length() > 0 ) {
-          updateState();
-          dispose();
+          if (updateState()) {
+            dispose();
+            }
         }
       }
     } );
     cancel.addActionListener( new ActionListener() {
       public void actionPerformed( ActionEvent e ) {
         if( stateText.getText().length() > 0 ) {
-          removeState();
           dispose();
         }
       }
     } );
   }
 
-  void updateState() {
-    newState.stateName = stateText.getText();
-    if( halt.isSelected() ) newState.finalState = true;
+  boolean updateState() {
     boolean current = false;
     boolean start = false;
-    for( int i = 0; i < states.size(); i++ ) {
-      if( ( (State)states.elementAt( i ) ).currentState ) current = true;
-      if( ( (State)states.elementAt( i ) ).startState ) start = true;
+    for( State s : states) {
+      if(s == newState) {
+        continue;
+      }
+
+      if( ( s.currentState ) ) current = true;
+      if( ( s.startState ) ) start = true;
+      if( s.stateName.equals(stateText.getText())) {
+        //Dialog Box error
+        return false;
+      }
     }
     if( !current ) newState.currentState = true;
     if( !start ) newState.startState = true;
+
+    newState.stateName = stateText.getText();
+    newState.finalState = halt.isSelected();
+
+    return true;
   }
 
   void removeState() {

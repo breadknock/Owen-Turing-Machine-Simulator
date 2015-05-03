@@ -87,7 +87,14 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
   }
 
   void addState( double x, double y, String name ) {
-    states.addElement( new State( x, y, name, false ) );
+    State s = new State(x, y, name, false);
+
+    if(states.size() == 0) {
+        s.currentState = true;
+        s.startState = true;
+    }
+
+    states.addElement( s );
   }
 
   void addEdge( State from, State to ) {
@@ -285,6 +292,15 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
           newTransition.validate();
           newTransition.setVisible( true );
         }
+      }
+      for( State s : states ) {
+          if(mouseIn (s, x, y)) {
+              EditStateDialog editState = new EditStateDialog(s,states);
+              editState.pack();
+              editState.center();
+              editState.validate();
+              editState.setVisible(true);
+          }
       }
     }
     if( graphtoolbar.selectionMode == GraphToolBar.DELETE
