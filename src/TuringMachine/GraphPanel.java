@@ -295,7 +295,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
       }
       for( State s : states ) {
           if(mouseIn (s, x, y)) {
-              EditStateDialog editState = new EditStateDialog(s,states);
+              EditStateDialog editState = new EditStateDialog(s,states,this);
               editState.pack();
               editState.center();
               editState.validate();
@@ -776,4 +776,9 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
   public Dimension getPreferredSize() {
     return new Dimension( 300, 500 );
   }
+
+  public void update() {
+      transitions.update();
+  }
+
 }

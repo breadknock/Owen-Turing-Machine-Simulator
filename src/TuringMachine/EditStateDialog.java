@@ -39,10 +39,13 @@ public class EditStateDialog extends JDialog {
   JButton cancel = new JButton( "Cancel" );
   State newState;
   Vector<State> states;
+  GraphPanel parent;
 
-  EditStateDialog( State newState, Vector<State> states ) {
+  EditStateDialog( State newState, Vector<State> states , GraphPanel parent) {
     this.newState = newState;
     this.states = states;
+    this.parent = parent;
+
     halt.setSelected(newState.finalState);
     Container mypane = getContentPane();
     mypane.setLayout( new GridLayout( 3, 2, 0, 0 ) );
@@ -60,6 +63,7 @@ public class EditStateDialog extends JDialog {
       public void actionPerformed( ActionEvent e ) {
         if( stateText.getText().length() > 0 ) {
           if (updateState()) {
+            EditStateDialog.this.parent.update();
             dispose();
             }
         }

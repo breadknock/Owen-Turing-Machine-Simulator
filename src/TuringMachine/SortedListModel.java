@@ -48,4 +48,8 @@ public class SortedListModel extends DefaultListModel {
     if( j > 0 && j == size() ) super.addElement( obj );
     if( size() == 0 ) super.addElement( obj );
   }
+
+  public void update() {
+      fireContentsChanged(this,0,size()-1);
+  }
 }
