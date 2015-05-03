@@ -14,7 +14,7 @@ Currently planned changes:
     + add ability to double click to change node name
 - reset button (rest machine and load)
 - shortcut buttons
-- Create new Turing Machine
++ Create new Turing Machine
 
 Planned release date: May 15th
 

@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.io.*;
+import java.util.*;
 
 /**
  * Main visual holder component
@@ -23,6 +24,10 @@ public class TuringMachineFrame extends JFrame {
    * File menu for the main menu bar
    */
   private JMenu jMenuFile = new JMenu();
+  /**
+   * New Option for the File menu
+   */
+  private JMenuItem jMenuFileNew = new JMenuItem();
   /**
    * Exit option for the File menu
    */
@@ -105,6 +110,12 @@ public class TuringMachineFrame extends JFrame {
         jMenuFileExit_actionPerformed(e);
       }
     });
+    jMenuFileNew.setText("New");
+    jMenuFileNew.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        jMenuFileNew_actionPerformed(e);
+      }
+    });
     jMenuFileOpen.setText("Open");
     jMenuFileOpen.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -156,6 +167,7 @@ public class TuringMachineFrame extends JFrame {
     });
 
     //add menu components to menu
+    jMenuFile.add(jMenuFileNew);
     jMenuFile.add(jMenuFileOpen);
     jMenuFile.add(jMenuFileSave);
     jMenuFile.add(jMenuFileSaveGraph);
@@ -183,6 +195,19 @@ public class TuringMachineFrame extends JFrame {
   public void jMenuFileExit_actionPerformed(ActionEvent e) {
     System.exit(0);
   }
+
+  public void jMenuFileNew_actionPerformed(ActionEvent e) {
+      machine.graphpanel.states = new Vector<State>();
+      machine.graphpanel.transitions = new SortedListModel();
+      machine.graphpanel.machine.currentEdge = null;
+      machine.graphpanel.machine.currentState = null;
+      JList transitions = new JList(machine.graphpanel.transitions);
+      transitions.setCellRenderer(new TransitionCellRenderer());
+      machine.graphpanel.transitionpanel.getViewport().setView(transitions);
+
+
+  }
+
 
   /**
    * File | Open action - brings up a TMFileChooser dialog
