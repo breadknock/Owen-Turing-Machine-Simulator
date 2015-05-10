@@ -40,6 +40,10 @@ public class TuringMachineFrame extends JFrame {
    */
   private JMenu jMenuFile = new JMenu();
   /**
+   * New Option for the File menu
+   */
+  private JMenuItem jMenuFileNew = new JMenuItem();
+  /**
    * Clear Option for the File menu
    */
   private JMenuItem jMenuFileClear = new JMenuItem();
@@ -132,6 +136,12 @@ public class TuringMachineFrame extends JFrame {
         jMenuFileExit_actionPerformed(e);
       }
     });
+    jMenuFileNew.setText("New");
+    jMenuFileNew.addActionListener(new ActionListener() {
+    	public void actionPerformed(ActionEvent e) {
+    		TuringMachineApp.createNewInstance();
+    	}
+    });
     jMenuFileClear.setText("Clear");
     jMenuFileClear.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -189,6 +199,7 @@ public class TuringMachineFrame extends JFrame {
     });
 
     //add menu components to menu
+    jMenuFile.add(jMenuFileNew);
     jMenuFile.add(jMenuFileClear);
     jMenuFile.add(jMenuFileOpen);
     jMenuFile.add(jMenuFileSave);
@@ -212,7 +223,8 @@ public class TuringMachineFrame extends JFrame {
    * @param e ActionEvent dummy variable
    */
   public void jMenuFileExit_actionPerformed(ActionEvent e) {
-    System.exit(0);
+	TuringMachineApp.close();
+    dispose();
   }
 
   public void jMenuFileClear_actionPerformed(ActionEvent e) {
@@ -481,7 +493,7 @@ public class TuringMachineFrame extends JFrame {
   }
 
   /**
-    * Overridden so we can exit when window is closed
+    * Overridden so we can exit when window is closed (if this is last window)
     */
   protected void processWindowEvent(WindowEvent e) {
     super.processWindowEvent(e);

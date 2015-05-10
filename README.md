@@ -23,7 +23,7 @@ Currently planned changes:
 - Allow for user to create comments
 - Allow for user to rectangularly select nodes & transitions
 - Allow for user to copy and paste nodes and transitions
-- ~~Change "New TM" to clear,~~ and give a "New TM" option that opens a new window
+- ~~Change "New TM" to clear, and give a "New TM" option that opens a new window~~
 - ~~Fix behavior when user presses the close button on a pop-up~~
 - Disable modification of tape while TM is running
 
