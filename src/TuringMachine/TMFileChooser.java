@@ -50,7 +50,7 @@ public class TMFileChooser extends JFileChooser
   TapePanel tapepanel;
   GraphPanel graphpanel;
   public JTextField maximum;
-  public static String curdir;
+  public String curdir;
 
   public TMFileChooser()
   {
@@ -406,10 +406,11 @@ public class TMFileChooser extends JFileChooser
   {
 	  graphpanel.machine.tape.editCellAt(-1, -1);
       graphpanel.machine.tape.clearSelection();
-    try
+    try (
+    	FileInputStream infile = new FileInputStream(open);
+    	ObjectInputStream opener = new ObjectInputStream(infile);
+    	)
     {
-      FileInputStream infile = new FileInputStream(open);
-      ObjectInputStream opener = new ObjectInputStream(infile);
       graphpanel.states = (Vector<State>)opener.readObject();
       int edges = opener.readInt();
       char oldChar;
@@ -457,7 +458,7 @@ public class TMFileChooser extends JFileChooser
       graphpanel.machine.currentState = null;
       graphpanel.machine.states = graphpanel.states;
       graphpanel.machine.transitions = graphpanel.transitions;
-      JList transitions = new JList(graphpanel.transitions);
+      JList<Edge> transitions = new JList<Edge>(graphpanel.transitions);
       transitions.setCellRenderer(new TransitionCellRenderer());
       graphpanel.transitionpanel.getViewport().setView(transitions);
       for(int k = 0; k < graphpanel.states.size(); k++)
@@ -475,9 +476,11 @@ public class TMFileChooser extends JFileChooser
 	int tempIndexOne;
 	int tempIndexTwo;
 	String tempString;
-    try
+	//Try-with-resources
+    try(
+    	BufferedReader infile = new BufferedReader(new FileReader(open))
+    )
     {
-      BufferedReader infile = new BufferedReader(new FileReader(open));
       String text;
       boolean implicit = false;
 
@@ -486,7 +489,6 @@ public class TMFileChooser extends JFileChooser
       int direction = 0;
       State from = new State(0,0,"temp",false);
       State to = new State(0,0,"temp",false);
-      int haltOffset = 0;
       boolean haltTransition = false;
 
       graphpanel.states = new Vector<State>();
@@ -512,7 +514,6 @@ public class TMFileChooser extends JFileChooser
       text = infile.readLine();
       while(!text.endsWith("/*EndGraphOutput*/"))
       {
-        haltOffset = 0;
         haltTransition = false;
         if(text.indexOf("start") != -1)
         {
@@ -542,7 +543,6 @@ public class TMFileChooser extends JFileChooser
           {
             haltTransition = true;
             graphpanel.addState(locationGenerator.nextInt((int)d.getWidth()), locationGenerator.nextInt((int)d.getHeight()), String.valueOf(numStates));
-            haltOffset = 3;
           }
         }
         int j = 0;
@@ -599,9 +599,10 @@ public class TMFileChooser extends JFileChooser
         temp.currentState = false;
         temp.highlight = false;
       }
-
     }
     catch(Exception e){e.printStackTrace();}
+    finally {
+    }
   }
 
     public void openXMLFile(File open){
@@ -756,7 +757,7 @@ public class TMFileChooser extends JFileChooser
           if(inputcheck.equals("Tape")){
         	  double size = Double.valueOf(input.readLine());
         	  
-        	  for (int i=graphpanel.machine.TAPESIZE; i < size; i++){
+        	  for (int i=TM.TAPESIZE; i < size; i++){
         	  graphpanel.machine.tapemodel.addColumn('0', new Object[]{'0'});
         	  }
              for (int i=0; i < size; i++){

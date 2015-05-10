@@ -30,7 +30,11 @@ import javax.swing.table.TableCellEditor;
 
 public class TapeEditor extends JTextField implements TableCellEditor
 {
-    private CellEditorListener cellEditorListener  = null;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4124384501187126231L;
+	private CellEditorListener cellEditorListener  = null;
     private String old;
 
     // Start editing
@@ -88,8 +92,8 @@ public class TapeEditor extends JTextField implements TableCellEditor
     }
 
     @Override
-    public void removeCellEditorListener(CellEditorListener celleditorlistener)
+    public void removeCellEditorListener(CellEditorListener cellEditorListener)
     {
-        if (cellEditorListener == cellEditorListener) cellEditorListener = null;
+        if (this.cellEditorListener == cellEditorListener) cellEditorListener = null;
     }
 }

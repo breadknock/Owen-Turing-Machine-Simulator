@@ -22,6 +22,9 @@ import javax.swing.JProgressBar;
 
 public class SaveProgressDialog extends JDialog
 {
+
+  private static final long serialVersionUID = -7921499666514594173L;
+  
   public JProgressBar saveProgressBar;
   public JLabel indicator;
 

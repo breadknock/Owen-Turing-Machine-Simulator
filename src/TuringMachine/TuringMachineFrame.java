@@ -25,7 +25,9 @@ import javax.swing.JPanel;
  * @version 1.0
  */
 public class TuringMachineFrame extends JFrame {
-  /**
+
+  private static final long serialVersionUID = -3383177807569442195L;
+/**
    * Helper variable for the contentPane of this
    */
   private JPanel contentPane;
