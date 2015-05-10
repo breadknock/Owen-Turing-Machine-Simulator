@@ -36,9 +36,9 @@ public class ExecutionSaver extends Thread
       graphpanel.machine.tape.clearSelection();
     try
     {
-      Vector tapeStates = new Vector();
-      Vector tapePositions = new Vector();
-      Vector currentStates = new Vector();
+      Vector<Vector> tapeStates = new Vector<Vector>();
+      Vector<Integer> tapePositions = new Vector<Integer>();
+      Vector<String> currentStates = new Vector<String>();
       int furthestLeft = graphpanel.machine.tape.getColumnCount() -1;
       int furthestRight = 0;
       int transitionsMade = 0;

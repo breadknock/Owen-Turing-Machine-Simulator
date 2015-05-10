@@ -55,6 +55,7 @@ public class NewTransitionDialog extends JDialog implements ActionListener, Docu
 
   public NewTransitionDialog( Edge transition, SortedListModel transitions,
       String machineType, boolean edit, TransitionsPane transitionpanel ) {
+	setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
     this.transitionpanel = transitionpanel;
     this.edit = edit;
     this.machineType = machineType;

@@ -40,9 +40,9 @@ public class TuringMachineFrame extends JFrame {
    */
   private JMenu jMenuFile = new JMenu();
   /**
-   * New Option for the File menu
+   * Clear Option for the File menu
    */
-  private JMenuItem jMenuFileNew = new JMenuItem();
+  private JMenuItem jMenuFileClear = new JMenuItem();
   /**
    * Exit option for the File menu
    */
@@ -125,10 +125,10 @@ public class TuringMachineFrame extends JFrame {
         jMenuFileExit_actionPerformed(e);
       }
     });
-    jMenuFileNew.setText("New");
-    jMenuFileNew.addActionListener(new ActionListener() {
+    jMenuFileClear.setText("Clear");
+    jMenuFileClear.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        jMenuFileNew_actionPerformed(e);
+        jMenuFileClear_actionPerformed(e);
       }
     });
     jMenuFileOpen.setText("Open");
@@ -182,7 +182,7 @@ public class TuringMachineFrame extends JFrame {
     });
 
     //add menu components to menu
-    jMenuFile.add(jMenuFileNew);
+    jMenuFile.add(jMenuFileClear);
     jMenuFile.add(jMenuFileOpen);
     jMenuFile.add(jMenuFileSave);
     jMenuFile.add(jMenuFileSaveGraph);
@@ -211,7 +211,7 @@ public class TuringMachineFrame extends JFrame {
     System.exit(0);
   }
 
-  public void jMenuFileNew_actionPerformed(ActionEvent e) {
+  public void jMenuFileClear_actionPerformed(ActionEvent e) {
       machine.graphpanel.states = new Vector<State>();
       machine.graphpanel.transitions = new SortedListModel();
       machine.graphpanel.machine.currentEdge = null;
