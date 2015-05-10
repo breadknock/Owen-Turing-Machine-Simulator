@@ -17,7 +17,8 @@ Currently planned changes:
 - Show number of states and transitions
 - Show number transitions when doing multiple inputs
 
-- Only allow for user to select TM type when a new TM is created
+- ~~Only allow for user to select TM type when a new TM is created~~
+    - Automatically detect TM type when opening machine
 - ~~Allow user to open Turing Machine file from command-line~~
 - Allow user to select TM type on command-line
 - Allow for user to create comments

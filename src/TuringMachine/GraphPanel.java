@@ -281,13 +281,13 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
     offgraphics.setColor( getBackground() );
     offgraphics.fillRect( 0, 0, d.width, d.height );
     FontMetrics fm = offgraphics.getFontMetrics();
-    for( int i = 0; i < transitions.size(); i++ ) {
+    for(int i = 0; i < transitions.size(); i++ ) {
       Edge e = transitions.elementAt( i );
       paintEdge( offgraphics, e, fm );
     }
 
-    for( int i = 0; i < states.size(); i++ ) {
-      paintNode( offgraphics, states.elementAt( i ), fm );
+    for(State state : states) {
+      paintNode( offgraphics, state, fm );
     }
     g.drawImage( offscreen, 0, 0, null );
   }
@@ -302,7 +302,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
         Edge m = transitions.elementAt( i );
         if( mouseInEdge( m, x, y ) ) {
           NewTransitionDialog newTransition = new NewTransitionDialog( m,
-              transitions, (String)messagepanel.machineType.getSelectedItem(),
+              transitions, machine.machineType,
               true, transitionpanel );
           newTransition.pack();
           newTransition.center();
@@ -461,8 +461,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
           if( mouseIn( n, x, y ) ) {
             current.toState = n;
             NewTransitionDialog newTransition = new NewTransitionDialog(
-                current, transitions, (String)messagepanel.machineType
-                    .getSelectedItem(), false, transitionpanel );
+                current, transitions, machine.machineType, false, transitionpanel );
             newTransition.pack();
             newTransition.center();
             newTransition.validate();

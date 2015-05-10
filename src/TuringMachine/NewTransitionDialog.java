@@ -49,12 +49,12 @@ public class NewTransitionDialog extends JDialog implements ActionListener, Docu
   JButton cancel = new JButton( "Cancel" );
   Edge transition;
   SortedListModel transitions;
-  String machineType;
+  int machineType;
   boolean edit;
   TransitionsPane transitionpanel;
 
   public NewTransitionDialog( Edge transition, SortedListModel transitions,
-      String machineType, boolean edit, TransitionsPane transitionpanel ) {
+      int machineType, boolean edit, TransitionsPane transitionpanel ) {
 	setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
     this.transitionpanel = transitionpanel;
     this.edit = edit;
@@ -151,7 +151,7 @@ public class NewTransitionDialog extends JDialog implements ActionListener, Docu
       temp.setVisible( true );
       return false;
     }
-    if( machineType.equals( "Quadruple Machine" )
+    if( machineType == TM.QUADRUPLE
         && ( !newCharacter.equals( String.valueOf( (char)TM.NULL ) ) && !( (String)directionPick
             .getSelectedItem() ).equals( "NULL" ) ) ) {
       WarningBox temp = new WarningBox(
@@ -160,7 +160,7 @@ public class NewTransitionDialog extends JDialog implements ActionListener, Docu
       temp.setVisible( true );
       return false;
     }
-    if( machineType.equals( "Quintuple Machine" )
+    if(machineType == TM.QUINTUPLE
         && ( newCharacter.equals( String.valueOf( (char)TM.NULL ) ) || ( (String)directionPick
             .getSelectedItem() ).equals( "NULL" ) ) ) {
       WarningBox temp = new WarningBox(
@@ -208,7 +208,7 @@ public class NewTransitionDialog extends JDialog implements ActionListener, Docu
   }
   public void actionPerformed(ActionEvent e) {
     if(e.getActionCommand().equals("Direction")) {
-      if(machineType.equals("Quadruple Machine")) {
+      if(machineType == TM.QUADRUPLE) {
         if(directionPick.getSelectedItem().equals("NULL")) {
         	newCharText.setEnabled(true);
         } else {
@@ -218,7 +218,7 @@ public class NewTransitionDialog extends JDialog implements ActionListener, Docu
     }
   }
   public void changedUpdate(DocumentEvent de) {
-	  if(machineType.equals("Quadruple Machine")) {
+	  if(machineType == TM.QUADRUPLE) {
   		if(newCharText.getText().equals("NULL")) {
   			directionPick.setEnabled(true);
   		} else {

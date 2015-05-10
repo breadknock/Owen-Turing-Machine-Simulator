@@ -46,6 +46,7 @@ public class TM implements Runnable {
   DefaultListModel<Edge> transitions;
   MessagePanel messages;
   TransitionsPane transitionpanel;
+  int machineType;
 
   public TM() {
     initMachine( TAPESIZE / 2, "", new StringBuffer( "" ) );

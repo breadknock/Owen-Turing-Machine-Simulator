@@ -46,11 +46,12 @@ public class MessagePanel extends JPanel {
   JTextArea messages;
   JLabel currentState;
   JComboBox<String> speed;
-  JComboBox<String> machineType;
   JLabel nonblanks;
   JLabel totaltransitions;
   JTextField inputString;
   JTextField inputsQuantity;
+  JLabel stateCount;
+  JLabel edgeCount;
   MultipleInputs miWindow;
 
   // references to exterior components
@@ -101,21 +102,15 @@ public class MessagePanel extends JPanel {
         .valueOf( 0 ) ) );
     totaltransitions = new JLabel( new String( "Transitions Made: " )
         .concat( String.valueOf( 0 ) ) );
-    JLabel machineTypeLabel = new JLabel( "Machine Type:", JLabel.RIGHT );
 
     inputString = new JTextField();
     inputString.setToolTipText("Use [ ] to indicate starting position");
-    machineType = new JComboBox<String>();
-    machineType.addItem( "Quadruple Machine" );
-    machineType.addItem( "Quintuple Machine" );
     optionspanel = new JPanel();
-    optionspanel.setLayout( new GridLayout( 5, 2, 5, 0 ) );
+    optionspanel.setLayout( new GridLayout( 4, 2, 5, 0 ) );
     optionspanel.add( reset );
     optionspanel.add( totaltransitions );
     optionspanel.add( clearTape );
     optionspanel.add( nonblanks );
-    optionspanel.add( machineTypeLabel );
-    optionspanel.add( machineType );
     optionspanel.add( loadInput );
     optionspanel.add( inputString );
     optionspanel.add( resetAll );
@@ -288,7 +283,6 @@ public class MessagePanel extends JPanel {
 	
         machine.nonBlanks = 0;
         updateLabels( machine.nonBlanks, machine.totalTransitions );
-	
         addMessage( "Tape Cleared" );
 
   }

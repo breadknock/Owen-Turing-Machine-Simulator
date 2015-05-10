@@ -107,6 +107,8 @@ public class TuringMachineFrame extends JFrame {
 	machine = new TuringMachineSimulator();
 	if(file != null) {
 		openFile(file);
+	} else {
+		machine.machine.machineType = MachineTypePicker.getNewMachineType();
 	}
     try {
       jbInit();
@@ -238,7 +240,7 @@ public class TuringMachineFrame extends JFrame {
       JList<Edge> transitions = new JList<Edge>(machine.graphpanel.transitions);
       transitions.setCellRenderer(new TransitionCellRenderer());
       machine.graphpanel.transitionpanel.getViewport().setView(transitions);
-
+      machine.machine.machineType = MachineTypePicker.getNewMachineType();
 
   }
 
@@ -264,11 +266,11 @@ public class TuringMachineFrame extends JFrame {
 	  if(file.getName().endsWith("tm"))
 	    filechooser.openFile(file);
 	  else if(file.getName().endsWith("tmo"))
-	    filechooser.openTMOFile(filechooser.getSelectedFile());
+	    filechooser.openTMOFile(file);
 	  else if(file.getName().endsWith("txt"))
-	    filechooser.openTapeFile(filechooser.getSelectedFile());
+	    filechooser.openTapeFile(file);
 	  else
-	    filechooser.openXMLFile(filechooser.getSelectedFile());
+	    filechooser.openXMLFile(file);
   }
   /**
    * File | Save action - brings up a TMFileChooser dialog
