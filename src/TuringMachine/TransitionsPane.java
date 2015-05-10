@@ -1,7 +1,8 @@
 package TuringMachine;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Dimension;
+
+import javax.swing.JScrollPane;
 
 /**
  * ScrollPane to hold the Transition list

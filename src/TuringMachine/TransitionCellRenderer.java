@@ -1,7 +1,10 @@
 package TuringMachine;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Component;
+
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.ListCellRenderer;
 
 /**
  * ScrollPane to hold the Transition list

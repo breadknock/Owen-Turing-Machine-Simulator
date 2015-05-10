@@ -1,8 +1,11 @@
 package TuringMachine;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.KeyListener;
+import java.awt.BorderLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
 
 /**
  * Holding component which houses all visual components of the actual simulator

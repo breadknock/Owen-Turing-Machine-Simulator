@@ -1,9 +1,6 @@
 package TuringMachine;
 
-import java.util.*;
-import javax.swing.*;
-import javax.swing.table.*;
-import java.io.*;
+import java.io.Serializable;
 
 public class State implements Serializable {
   private static final long serialVersionUID = 7903724405884412505L;

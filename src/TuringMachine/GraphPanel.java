@@ -1,13 +1,30 @@
 package TuringMachine;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.RenderingHints;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Point2D;
+import java.awt.geom.QuadCurve2D;
+import java.util.Vector;
+
 import javax.swing.JPanel;
 import javax.swing.JSlider;
-import javax.swing.event.*;
-import java.awt.event.*;
-import java.util.*;
-import java.awt.*;
-import java.awt.geom.*;
-import java.lang.Math;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  * Title: Description: Copyright: Copyright (c) 2002 Company:

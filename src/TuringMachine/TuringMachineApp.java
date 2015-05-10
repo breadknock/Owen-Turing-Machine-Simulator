@@ -1,6 +1,8 @@
 package TuringMachine;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import javax.swing.UIManager;
 
 /**
@@ -47,6 +49,7 @@ public class TuringMachineApp {
     catch ( Exception e ) {
       e.printStackTrace();
     }
+
     new TuringMachineApp();
   }
 }

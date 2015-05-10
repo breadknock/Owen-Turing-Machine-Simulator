@@ -1,20 +1,10 @@
 package TuringMachine;
 
-import javax.swing.JFileChooser;
-import java.io.*;
-import java.lang.*;
-import java.util.*;
-import javax.swing.*;
-import javax.swing.table.*;
-import java.awt.*;
-import java.awt.print.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.util.Vector;
 
-import org.w3c.dom.*;
-import org.xml.sax.*;
-import javax.xml.parsers.*;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.*;
-import javax.xml.transform.stream.*;
 
 /**
  * <p>Title: </p>

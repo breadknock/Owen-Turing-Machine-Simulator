@@ -1,16 +1,6 @@
 package TuringMachine;
 
-import java.util.*;
-
-import javax.swing.*;
-
-import java.awt.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
-import javax.swing.event.CellEditorListener;
-import javax.swing.event.ChangeEvent;
-import javax.swing.table.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * <p>

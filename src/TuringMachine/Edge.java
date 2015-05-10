@@ -1,9 +1,5 @@
 package TuringMachine;
 
-import java.util.*;
-import javax.swing.*;
-import javax.swing.table.*;
-import java.io.*;
 
 public class Edge {
   State fromState;

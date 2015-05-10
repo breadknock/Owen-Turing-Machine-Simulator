@@ -1,20 +1,15 @@
 package TuringMachine;
 
-import javax.swing.JFileChooser;
-import java.io.*;
-import java.lang.*;
-import java.util.*;
-import javax.swing.*;
-import javax.swing.table.*;
-import java.awt.*;
-import java.awt.print.*;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
 
-import org.w3c.dom.*;
-import org.xml.sax.*;
-import javax.xml.parsers.*;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.*;
-import javax.xml.transform.stream.*;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JProgressBar;
+
 
 /**
  * <p>Title: </p>

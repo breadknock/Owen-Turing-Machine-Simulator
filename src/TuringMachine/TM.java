@@ -1,9 +1,10 @@
 package TuringMachine;
 
-import java.util.*;
-import javax.swing.*;
-import javax.swing.table.*;
-import java.io.*;
+import java.util.Vector;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JTable;
+import javax.swing.table.TableColumn;
 
 public class TM implements Runnable {
   // transition results
