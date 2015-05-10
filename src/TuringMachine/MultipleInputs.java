@@ -177,14 +177,14 @@ public class MultipleInputs extends JFrame {
 		
 	
         machine.nonBlanks = 0;
-        mp.updateLabels( machine.nonBlanks, machine.totalTransitions );
+        mp.updateLabels( machine.nonBlanks, machine.totalTransitions, machine.states.size(), machine.transitions.size());
 	
        mp.addMessage( "Tape Cleared" );
         /* LOAD INPUT STRING */
         machine.loadInputString( inputstrings.get( i ), starts.get(i)); 
         mp.addMessage( inputstrings.get( i ).concat(
             " loaded onto tape (Input " + i + ")" ) );
-        mp.updateLabels( machine.nonBlanks, machine.totalTransitions );
+        mp.updateLabels( machine.nonBlanks, machine.totalTransitions, machine.states.size(), machine.transitions.size());
         
         /* RESET MACHINE */
         for( int x = 0; x < machine.states.size(); x++ ) {
@@ -201,7 +201,7 @@ public class MultipleInputs extends JFrame {
           n.currentEdge = false;
         }
         machine.totalTransitions = 0;
-        mp.updateLabels( machine.nonBlanks, machine.totalTransitions );
+        mp.updateLabels( machine.nonBlanks, machine.totalTransitions, machine.states.size(), machine.transitions.size());
         mp.addMessage( "Machine Reset" );
   
         /* RUN */

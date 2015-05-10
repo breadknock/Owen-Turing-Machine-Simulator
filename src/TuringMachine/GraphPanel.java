@@ -303,7 +303,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
         if( mouseInEdge( m, x, y ) ) {
           NewTransitionDialog newTransition = new NewTransitionDialog( m,
               transitions, machine.machineType,
-              true, transitionpanel );
+              true, transitionpanel, messagepanel );
           newTransition.pack();
           newTransition.center();
           newTransition.validate();
@@ -445,6 +445,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
         }
       }
     }
+    messagepanel.updateLabels( machine.nonBlanks, machine.totalTransitions, machine.states.size(), machine.transitions.size());
     repaint();
     e.consume();
   }
@@ -461,7 +462,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
           if( mouseIn( n, x, y ) ) {
             current.toState = n;
             NewTransitionDialog newTransition = new NewTransitionDialog(
-                current, transitions, machine.machineType, false, transitionpanel );
+                current, transitions, machine.machineType, false, transitionpanel, messagepanel );
             newTransition.pack();
             newTransition.center();
             newTransition.validate();
@@ -501,6 +502,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
         pickEdge = null;
       }
     }
+    messagepanel.updateLabels( machine.nonBlanks, machine.totalTransitions, machine.states.size(), machine.transitions.size());
     repaint();
     e.consume();
   }

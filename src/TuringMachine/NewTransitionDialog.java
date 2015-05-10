@@ -52,9 +52,11 @@ public class NewTransitionDialog extends JDialog implements ActionListener, Docu
   int machineType;
   boolean edit;
   TransitionsPane transitionpanel;
+  MessagePanel mp;
 
   public NewTransitionDialog( Edge transition, SortedListModel transitions,
-      int machineType, boolean edit, TransitionsPane transitionpanel ) {
+      int machineType, boolean edit, TransitionsPane transitionpanel, final MessagePanel mp) {
+	this.mp = mp;
 	setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
     this.transitionpanel = transitionpanel;
     this.edit = edit;
@@ -108,6 +110,8 @@ public class NewTransitionDialog extends JDialog implements ActionListener, Docu
     cancel.addActionListener( new ActionListener() {
       public void actionPerformed( ActionEvent e ) {
         removeTransition();
+        mp.updateLabels( mp.machine.nonBlanks, mp.machine.totalTransitions, mp.machine.states.size(), mp.machine.transitions.size());
+
         dispose();
       }
     } );
@@ -131,6 +135,7 @@ public class NewTransitionDialog extends JDialog implements ActionListener, Docu
 
   void removeTransition() {
     if( !edit ) transitions.removeElement( transition );
+    
   }
 
   boolean checkItems() {

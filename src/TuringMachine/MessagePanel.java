@@ -105,8 +105,11 @@ public class MessagePanel extends JPanel {
 
     inputString = new JTextField();
     inputString.setToolTipText("Use [ ] to indicate starting position");
+    edgeCount = new JLabel();
+    stateCount = new JLabel();
+    
     optionspanel = new JPanel();
-    optionspanel.setLayout( new GridLayout( 4, 2, 5, 0 ) );
+    optionspanel.setLayout( new GridLayout( 5, 2, 5, 0 ) );
     optionspanel.add( reset );
     optionspanel.add( totaltransitions );
     optionspanel.add( clearTape );
@@ -115,6 +118,8 @@ public class MessagePanel extends JPanel {
     optionspanel.add( inputString );
     optionspanel.add( resetAll );
     optionspanel.add( multipleInputs );
+    optionspanel.add(stateCount);
+    optionspanel.add(edgeCount);
     optionspanel.setPreferredSize( new Dimension( 310, 150 ) );
 
     add( buttonpanel, BorderLayout.WEST );
@@ -145,7 +150,7 @@ public class MessagePanel extends JPanel {
           if( machine.nextStateNotSet ) {
             machine.setState( machine.currentEdge.toState );
             machine.totalTransitions++;
-            updateLabels( machine.nonBlanks, machine.totalTransitions );
+            updateLabels( machine.nonBlanks, machine.totalTransitions, machine.states.size(), machine.transitions.size() );
           }
           machine.clearEdge();
           machine.moving = TM.STAY;
@@ -259,7 +264,7 @@ public class MessagePanel extends JPanel {
     }
     machine.loadInputString( input, start);
     addMessage( input.concat( " loaded onto tape" ) );
-    updateLabels( machine.nonBlanks, machine.totalTransitions );
+    updateLabels( machine.nonBlanks, machine.totalTransitions, machine.states.size(), machine.transitions.size());
 
   }
 
@@ -282,9 +287,13 @@ public class MessagePanel extends JPanel {
 		
 	
         machine.nonBlanks = 0;
-        updateLabels( machine.nonBlanks, machine.totalTransitions );
+        updateLabels( machine.nonBlanks, machine.totalTransitions,machine.states.size(), machine.transitions.size()  );
         addMessage( "Tape Cleared" );
 
+  }
+  
+  public void repaint() {
+	  super.repaint();
   }
 
   public void resetMachineAction() {
@@ -302,7 +311,7 @@ public class MessagePanel extends JPanel {
           n.currentEdge = false;
         }
         machine.totalTransitions = 0;
-        updateLabels( machine.nonBlanks, machine.totalTransitions );
+        updateLabels( machine.nonBlanks, machine.totalTransitions, machine.states.size(), machine.transitions.size()  );
         addMessage( "Machine Reset" );
 
   }
@@ -321,11 +330,13 @@ public class MessagePanel extends JPanel {
         scrollmessages.getVerticalScrollBar().getMaximum() );
   }
 
-  public void updateLabels( int nonBlankChars, int transitions ) {
+  public void updateLabels( int nonBlankChars, int transitions, int numStates, int numTransitions) {
     nonblanks.setText( new String( " Non 0's on Tape: " ).concat( String
         .valueOf( nonBlankChars ) ) );
     totaltransitions.setText( new String( "Transitions Made: " ).concat( String
         .valueOf( transitions ) ) );
+    stateCount.setText( new String("States: ").concat(String.valueOf(numStates)));
+    edgeCount.setText( new String("Transitions: ").concat(String.valueOf(numTransitions)));
   }
 
   public void showResults( int haltReason ) {

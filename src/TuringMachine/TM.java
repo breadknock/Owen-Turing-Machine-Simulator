@@ -329,7 +329,8 @@ public class TM implements Runnable {
         }
         setState( fromTemp.toState );
         totalTransitions++;
-        messages.updateLabels( nonBlanks, totalTransitions );
+        messages.updateLabels( nonBlanks, totalTransitions,states.size(), transitions.size());
+
         moving = fromTemp.direction;
         nextStateNotSet = false;
         return temp;
