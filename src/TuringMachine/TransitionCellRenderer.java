@@ -12,7 +12,7 @@ import javax.swing.ListCellRenderer;
  * @author Owen F. Kellett
  * @version 1.0
  */
-public class TransitionCellRenderer extends JLabel implements ListCellRenderer {
+public class TransitionCellRenderer extends JLabel implements ListCellRenderer<Edge> {
   /**
 	 * 
 	 */
@@ -21,11 +21,11 @@ public class TransitionCellRenderer extends JLabel implements ListCellRenderer {
   public TransitionCellRenderer() {
     setOpaque( true );
   }
-
-  public Component getListCellRendererComponent( JList list, Object value,
+  
+  public Component getListCellRendererComponent( JList<? extends Edge> list, Edge e,
       int index, boolean isSelected, boolean cellHasFocus ) {
-    setText( ( (Edge)value ).listLabel() );
-    if( ( (Edge)value ).currentEdge ) {
+    setText( ( e ).listLabel() );
+    if( ( e ).currentEdge ) {
       setBackground( list.getSelectionBackground() );
       setForeground( list.getSelectionForeground() );
     }
@@ -36,6 +36,7 @@ public class TransitionCellRenderer extends JLabel implements ListCellRenderer {
 
     return this;
   }
+
 }
 
 /**

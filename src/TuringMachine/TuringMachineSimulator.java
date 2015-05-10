@@ -76,7 +76,7 @@ public class TuringMachineSimulator extends JPanel {
     // JList tape = new JList(machine.tape);
     // tapepanel.getViewport().setView(tape);
 
-    JList transitions = new JList( machine.transitions );
+    JList<Edge> transitions = new JList<Edge>( machine.transitions );
     transitions.setCellRenderer( new TransitionCellRenderer() );
     transitionspanel.setBorder( BorderFactory
         .createTitledBorder( "Transitions" ) );

@@ -410,7 +410,7 @@ public class TMFileChooser extends JFileChooser
     {
       FileInputStream infile = new FileInputStream(open);
       ObjectInputStream opener = new ObjectInputStream(infile);
-      graphpanel.states = (Vector)opener.readObject();
+      graphpanel.states = (Vector<State>)opener.readObject();
       int edges = opener.readInt();
       char oldChar;
       char newChar;
@@ -489,7 +489,7 @@ public class TMFileChooser extends JFileChooser
       int haltOffset = 0;
       boolean haltTransition = false;
 
-      graphpanel.states = new Vector();
+      graphpanel.states = new Vector<State>();
       graphpanel.transitions = new SortedListModel();
       Dimension d = graphpanel.getSize();
       Random locationGenerator = new Random();
@@ -590,7 +590,7 @@ public class TMFileChooser extends JFileChooser
       graphpanel.machine.currentState = null;
       graphpanel.machine.states = graphpanel.states;
       graphpanel.machine.transitions = graphpanel.transitions;
-      JList transitions = new JList(graphpanel.transitions);
+      JList<Edge> transitions = new JList<Edge>(graphpanel.transitions);
       transitions.setCellRenderer(new TransitionCellRenderer());
       graphpanel.transitionpanel.getViewport().setView(transitions);
       for(int k = 0; k < graphpanel.states.size(); k++)
@@ -608,7 +608,7 @@ public class TMFileChooser extends JFileChooser
       try
       {
 
-       graphpanel.states = new Vector();
+       graphpanel.states = new Vector<State>();
        graphpanel.transitions = new SortedListModel();
        
        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -728,7 +728,7 @@ public class TMFileChooser extends JFileChooser
       graphpanel.machine.currentState = null;
       graphpanel.machine.states = graphpanel.states;
       graphpanel.machine.transitions = graphpanel.transitions;
-      JList transitions = new JList(graphpanel.transitions);
+      JList<Edge> transitions = new JList<Edge>(graphpanel.transitions);
       transitions.setCellRenderer(new TransitionCellRenderer());
       graphpanel.transitionpanel.getViewport().setView(transitions);
       for(int k = 0; k < graphpanel.states.size(); k++)
@@ -749,7 +749,7 @@ public class TMFileChooser extends JFileChooser
           BufferedReader input = new BufferedReader(new FileReader(open));
           char[] cbuf = {' ', ' ', ' ', ' '};
           String inputcheck = null;
-          Vector inputs = new Vector();
+          Vector<String> inputs = new Vector<String>();
 
           inputcheck = input.readLine();
 

@@ -44,7 +44,7 @@ public class NewTransitionDialog extends JDialog implements ActionListener, Docu
   JLabel moveDirection = new JLabel( "Move Direction" );
   JTextField oldCharText = new JTextField();
   JTextField newCharText = new JTextField( "NULL" );
-  JComboBox directionPick = new JComboBox();
+  JComboBox<String> directionPick = new JComboBox<String>();
   JButton ok = new JButton( "OK" );
   JButton cancel = new JButton( "Cancel" );
   Edge transition;

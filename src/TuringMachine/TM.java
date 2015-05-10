@@ -42,9 +42,8 @@ public class TM implements Runnable {
   // references to exterior components
   State currentState;
   Edge currentEdge;
-  @SuppressWarnings( "unchecked" )
-  Vector states;
-  DefaultListModel transitions;
+  Vector<State> states;
+  DefaultListModel<Edge> transitions;
   MessagePanel messages;
   TransitionsPane transitionpanel;
 
@@ -60,12 +59,11 @@ public class TM implements Runnable {
   /*
    * public void setTape(TapePanel tape) { // display = tape; }
    */
-  public void setTransitions( DefaultListModel transitions ) {
+  public void setTransitions( DefaultListModel<Edge> transitions ) {
     this.transitions = transitions;
   }
 
-  @SuppressWarnings( "unchecked" )
-  public void setStates( Vector states ) {
+  public void setStates( Vector<State> states ) {
     this.states = states;
   }
 
@@ -111,20 +109,19 @@ public class TM implements Runnable {
     return( Character.isLetterOrDigit( ch ) || " +/*-!@#$%&()=,.[]".indexOf( ch ) > -1 );
   }
 
-  @SuppressWarnings( "unchecked" )
   public boolean initMachine( int initPos, String initChars,
       StringBuffer errorMsg ) {
 
     this.initPos = initPos;
     // int numChars = initChars.length();
-    Vector tapeIndicator = new Vector();
-    Vector tapeData = new Vector();
+    Vector<Character> tapeIndicator = new Vector<Character>();
+    Vector<Character> tapeData = new Vector<Character>();
     for( int i = 0; i < TAPESIZE; i++ ) {
       tapeIndicator.add( new Character( '0' ) );
       tapeData.add( new Character( DEFAULTCHAR ) );
     }
     tapeIndicator.setElementAt( new Character( '-' ), initPos );
-    Vector tapeData2 = new Vector();
+    Vector<Vector<Character>> tapeData2 = new Vector<Vector<Character>>();
     tapeData2.add( tapeData );
     tapemodel.setDataVector( tapeData2, tapeIndicator );
     tape = new TapeTable( tapemodel , this);

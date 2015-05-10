@@ -8,7 +8,7 @@ import javax.swing.DefaultListModel;
  * @author Owen F. Kellett
  * @version 1.0
  */
-public class SortedListModel extends DefaultListModel {
+public class SortedListModel extends DefaultListModel<Edge> {
   /**
 	 * 
 	 */
@@ -22,30 +22,30 @@ public class SortedListModel extends DefaultListModel {
    * Adds an edge into the list in the appropriate sorted location according to
    * its starting state
    * 
-   * @param obj
+   * @param e
    */
-  public void addSortedElement( Object obj ) {
+  public void addSortedElement( Edge e ) {
     int j = 0;
     for( j = 0; j < size(); j++ ) {
       if( ( (Edge)getElementAt( j ) ).fromState.stateName
-          .compareTo( ( (Edge)obj ).fromState.stateName ) < 0 )
+          .compareTo( ( e ).fromState.stateName ) < 0 )
         ;
       else if( ( (Edge)getElementAt( j ) ).fromState.stateName
-          .compareTo( ( (Edge)obj ).fromState.stateName ) == 0 ) {
-        if( ( (Edge)getElementAt( j ) ).oldChar < ( (Edge)obj ).oldChar )
+          .compareTo( ( e ).fromState.stateName ) == 0 ) {
+        if( ( getElementAt( j ) ).oldChar < ( e ).oldChar )
           ;
         else {
-          add( j, obj );
+          add( j, e );
           break;
         }
       }
       else {
-        add( j, obj );
+        add( j, e );
         break;
       }
     }
-    if( j > 0 && j == size() ) super.addElement( obj );
-    if( size() == 0 ) super.addElement( obj );
+    if( j > 0 && j == size() ) super.addElement( e );
+    if( size() == 0 ) super.addElement( e );
   }
 
   public void update() {
