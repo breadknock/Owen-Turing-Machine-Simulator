@@ -36,7 +36,7 @@ public class ExecutionSaver extends Thread
       graphpanel.machine.tape.clearSelection();
     try
     {
-      Vector<Vector> tapeStates = new Vector<Vector>();
+      Vector<Vector<Object>> tapeStates = new Vector<Vector<Object>>();
       Vector<Integer> tapePositions = new Vector<Integer>();
       Vector<String> currentStates = new Vector<String>();
       int furthestLeft = graphpanel.machine.tape.getColumnCount() -1;
@@ -44,7 +44,7 @@ public class ExecutionSaver extends Thread
       int transitionsMade = 0;
       for(int i = 0; i < number; i++)
       {
-        Vector tape = new Vector();
+        Vector<Object> tape = new Vector<Object>();
         for(int j = 0; j < graphpanel.machine.tape.getColumnCount(); j++)
           tape.add(graphpanel.machine.tape.getValueAt(0,j));
         tapeStates.add(tape);
@@ -81,7 +81,7 @@ public class ExecutionSaver extends Thread
       for(int i = 0; i < transitionsMade; i++)
       {
         boolean print = false;
-        Vector temp = (Vector)tapeStates.elementAt(i);
+        Vector<?> temp = (Vector<?>)tapeStates.elementAt(i);
         Integer tempLeft = (Integer)tapePositions.elementAt(i*3);
         Integer tempRight = (Integer)tapePositions.elementAt(i*3 + 1);
         Integer tempPos = (Integer)tapePositions.elementAt(i*3 + 2);
@@ -96,7 +96,7 @@ public class ExecutionSaver extends Thread
             else
               saver.print("&nbsp;");
           }
-          else if(((Character)temp.elementAt(j)).charValue() != graphpanel.machine.DEFAULTCHAR ||
+          else if(((Character)temp.elementAt(j)).charValue() != TM.DEFAULTCHAR ||
                   tempLeft.intValue() == j)
           {
               print = true;

@@ -47,6 +47,8 @@ import org.w3c.dom.NodeList;
 
 public class TMFileChooser extends JFileChooser
 {
+
+  private static final long serialVersionUID = 8973908592870498372L;
   TapePanel tapepanel;
   GraphPanel graphpanel;
   public JTextField maximum;
@@ -402,7 +404,8 @@ public class TMFileChooser extends JFileChooser
     catch(Exception e){e.printStackTrace();}
   }
 
-  public void openFile(File open)
+@SuppressWarnings("unchecked")
+public void openFile(File open)
   {
 	  graphpanel.machine.tape.editCellAt(-1, -1);
       graphpanel.machine.tape.clearSelection();
