@@ -36,7 +36,7 @@ public class GraphToolBar extends JPanel {
   private static final long serialVersionUID = 4774255986563532563L;
 
   // selection modes
-  public static int SELECT = 0, INSERTSTATE = 1, INSERTEDGE = 2, DELETE = 3,
+  public final static int SELECT = 0, INSERTSTATE = 1, INSERTEDGE = 2, DELETE = 3,
       SETSTART = 4, SETCURRENT = 5, SETHALT = 6;
 
   private JToggleButton select = new JToggleButton();

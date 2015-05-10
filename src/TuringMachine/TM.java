@@ -93,7 +93,7 @@ public class TM implements Runnable {
 
   public void clearEdge() {
     for( int j = 0; j < transitions.size(); j++ ) {
-      Edge n = (Edge)transitions.elementAt( j );
+      Edge n = transitions.elementAt( j );
       n.currentEdge = false;
     }
     currentEdge = null;
@@ -261,7 +261,7 @@ public class TM implements Runnable {
     String temp = new String();
     if( currentState == null ) {
       if( states.size() > 0 )
-        setState( (State)states.elementAt( 0 ) );
+        setState( states.elementAt( 0 ) );
       else {
         go = false;
         // reachedHaltingState = false;
@@ -280,7 +280,7 @@ public class TM implements Runnable {
     Character currentChar;
     currentChar = new Character( currentCharTemp2 );
     for( int i = 0; i < transitions.size(); i++ ) {
-      fromTemp = (Edge)transitions.elementAt( i );
+      fromTemp = transitions.elementAt( i );
       if( fromTemp.fromState == currentState
           && fromTemp.oldChar == currentChar.charValue() ) {
         temp = temp

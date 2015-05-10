@@ -15,45 +15,21 @@ import javax.swing.UIManager;
  */
 
 public class TuringMachineApp {
-  private static int instances = 0;
-  private boolean packFrame = false;
+  private int instances;
 
-  // Construct the application
-  public TuringMachineApp(File inputFile) {
-    TuringMachineFrame frame = new TuringMachineFrame(inputFile);
-    // Validate frames that have preset sizes
-    // Pack frames that have useful preferred size info, e.g. from their layout
-    if( packFrame ) {
-      frame.pack();
-    }
-    else {
-      frame.validate();
-    }
-    frame.setSize( new Dimension( 1024, 764 ) );
-    // Center the window
-    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    Dimension frameSize = frame.getSize();
-    if( frameSize.height > screenSize.height ) {
-      frameSize.height = screenSize.height;
-    }
-    if( frameSize.width > screenSize.width ) {
-      frameSize.width = screenSize.width;
-    }
-    frame.setLocation( ( screenSize.width - frameSize.width ) / 2,
-        ( screenSize.height - frameSize.height ) / 2 );
-    frame.setVisible( true );
-    instances++;
+  public TuringMachineApp() {
+	  instances = 0;
   }
   
-  public static void close() {
+  public void close() {
 	  instances--;
 	  if(instances == 0) {
 		  System.exit(0);
 	  }
   }
   
-  public static void createNewInstance() {
-	    TuringMachineFrame frame = new TuringMachineFrame();
+  public void createNewInstance(File inputFile) {
+	    JFrame frame = new TuringMachineFrame(this,inputFile);
 	    // Validate frames that have preset sizes
 	    // Pack frames that have useful preferred size info, e.g. from their layout
 
@@ -86,7 +62,7 @@ public class TuringMachineApp {
     if(args.length > 0) {
     	file = new File(args[0]);
     }
-
-    new TuringMachineApp(file);
+    TuringMachineApp tma = new TuringMachineApp();
+    tma.createNewInstance(file);
   }
 }

@@ -11,9 +11,6 @@ import javax.swing.JScrollPane;
  * @version 1.0
  */
 public class TransitionsPane extends JScrollPane {
-  /**
-	 * 
-	 */
   private static final long serialVersionUID = 5285771421231264288L;
 
   /**

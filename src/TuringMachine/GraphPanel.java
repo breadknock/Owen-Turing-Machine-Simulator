@@ -196,7 +196,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
       int j = 0;
       int total = 0;
       for( j = 0; j < transitions.size(); j++ ) {
-        Edge temp = (Edge)transitions.elementAt( j );
+        Edge temp = transitions.elementAt( j );
         if( temp == e ) break;
         if( temp.fromState == e.fromState && temp.fromState == temp.toState )
           total += h + 2;
@@ -215,7 +215,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
       int j = 0;
       boolean line = true;
       for( j = 0; j < transitions.size(); j++ ) {
-        Edge temp = (Edge)transitions.elementAt( j );
+        Edge temp = transitions.elementAt( j );
         if( temp == e ) break;
         if(  temp.fromState == e.fromState && temp.toState == e.toState  )
           line = false;
@@ -282,12 +282,12 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
     offgraphics.fillRect( 0, 0, d.width, d.height );
     FontMetrics fm = offgraphics.getFontMetrics();
     for( int i = 0; i < transitions.size(); i++ ) {
-      Edge e = (Edge)transitions.elementAt( i );
+      Edge e = transitions.elementAt( i );
       paintEdge( offgraphics, e, fm );
     }
 
     for( int i = 0; i < states.size(); i++ ) {
-      paintNode( offgraphics, (State)states.elementAt( i ), fm );
+      paintNode( offgraphics, states.elementAt( i ), fm );
     }
     g.drawImage( offscreen, 0, 0, null );
   }
@@ -299,7 +299,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
       int x = e.getX();
       int y = e.getY();
       for( int i = 0; i < transitions.size(); i++ ) {
-        Edge m = (Edge)transitions.elementAt( i );
+        Edge m = transitions.elementAt( i );
         if( mouseInEdge( m, x, y ) ) {
           NewTransitionDialog newTransition = new NewTransitionDialog( m,
               transitions, (String)messagepanel.machineType.getSelectedItem(),
@@ -326,13 +326,13 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
       int y = e.getY();
       State destroy = null;
       for( int i = 0; i < states.size(); i++ ) {
-        State n = (State)states.elementAt( i );
+        State n = states.elementAt( i );
         if( mouseIn( n, x, y ) ) {
           destroy = n;
         }
       }
       for( int i = 0; i < transitions.size(); i++ ) {
-        Edge m = (Edge)transitions.elementAt( i );
+        Edge m = transitions.elementAt( i );
         if( m.fromState.equals( destroy ) || m.toState.equals( destroy ) ) {
           transitions.removeElementAt( i );
           i--;
@@ -343,7 +343,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
       else {
         Edge gone = null;
         for( int i = 0; i < transitions.size(); i++ ) {
-          Edge n = (Edge)transitions.elementAt( i );
+          Edge n = transitions.elementAt( i );
           if( mouseInEdge( n, x, y ) ) gone = n;
         }
         if( gone != null ) transitions.removeElement( gone );
@@ -355,10 +355,10 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
       int x = e.getX();
       int y = e.getY();
       for( int i = 0; i < states.size(); i++ ) {
-        State n = (State)states.elementAt( i );
+        State n = states.elementAt( i );
         if( mouseIn( n, x, y ) ) {
           for( int j = 0; j < states.size(); j++ )
-            ( (State)states.elementAt( j ) ).startState = false;
+            ( states.elementAt( j ) ).startState = false;
           n.startState = true;
         }
       }
@@ -367,10 +367,10 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
       int x = e.getX();
       int y = e.getY();
       for( int i = 0; i < states.size(); i++ ) {
-        State n = (State)states.elementAt( i );
+        State n = states.elementAt( i );
         if( mouseIn( n, x, y ) ) {
           for( int j = 0; j < states.size(); j++ )
-            ( (State)states.elementAt( j ) ).currentState = false;
+            ( states.elementAt( j ) ).currentState = false;
           n.currentState = true;
           machine.currentState = n;
           machine.clearEdge();
@@ -381,7 +381,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
       int x = e.getX();
       int y = e.getY();
       for( int i = 0; i < states.size(); i++ ) {
-        State n = (State)states.elementAt( i );
+        State n = states.elementAt( i );
         if( mouseIn( n, x, y ) ) {
           if( n.finalState )
             n.finalState = false;
@@ -396,7 +396,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
       int x = e.getX();
       int y = e.getY();
       for( int i = 0; i < states.size(); i++ ) {
-        State n = (State)states.elementAt( i );
+        State n = states.elementAt( i );
         if( mouseIn( n, x, y ) ) {
           pick = n;
           pick.x = x;
@@ -406,7 +406,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
       }
       if( pick == null ) {
         for( int i = 0; i < transitions.size(); i++ ) {
-          Edge n = (Edge)transitions.elementAt( i );
+          Edge n = transitions.elementAt( i );
           if( mouseInEdge( n, x, y ) ) {
             pickEdge = n;
             if( pickEdge.fromState.x < pickEdge.toState.x ) {
@@ -431,13 +431,13 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
     }
     else if( graphtoolbar.selectionMode == GraphToolBar.INSERTSTATE ) {
       addState( e.getX(), e.getY(), getNextNodeName() );
-      pick = (State)states.lastElement();
+      pick = states.lastElement();
     }
     else if( graphtoolbar.selectionMode == GraphToolBar.INSERTEDGE ) {
       int x = e.getX();
       int y = e.getY();
       for( int i = 0; i < states.size(); i++ ) {
-        State n = (State)states.elementAt( i );
+        State n = states.elementAt( i );
         if( mouseIn( n, x, y ) ) {
           tempState1 = n;
           tempState2 = new State( e.getX(), e.getY(), "Temp", false );
@@ -455,9 +455,9 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
         int x = e.getX();
         int y = e.getY();
         int i;
-        Edge current = (Edge)transitions.lastElement();
+        Edge current = transitions.lastElement();
         for( i = 0; i < states.size(); i++ ) {
-          State n = (State)states.elementAt( i );
+          State n = states.elementAt( i );
           if( mouseIn( n, x, y ) ) {
             current.toState = n;
             NewTransitionDialog newTransition = new NewTransitionDialog(
@@ -524,7 +524,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
       int x = e.getX();
       int y = e.getY();
       for( int i = 0; i < states.size(); i++ ) {
-        State n = (State)states.elementAt( i );
+        State n = states.elementAt( i );
         if( mouseIn( n, x, y ) )
           n.highlight = true;
         else n.highlight = false;
@@ -556,7 +556,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
       int y = e.getY();
       boolean hover = false;
       for( int i = 0; i < states.size(); i++ ) {
-        State n = (State)states.elementAt( i );
+        State n = states.elementAt( i );
         if( mouseIn( n, x, y ) ) {
           n.highlight = true;
           setCursor( new Cursor( Cursor.HAND_CURSOR ) );
@@ -568,7 +568,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
         }
       }
       for( int i = 0; i < transitions.size(); i++ ) {
-        Edge n = (Edge)transitions.elementAt( i );
+        Edge n = transitions.elementAt( i );
         if( mouseInEdge( n, x, y ) ) {
           n.highlight = true;
           setCursor( new Cursor( Cursor.HAND_CURSOR ) );
@@ -605,7 +605,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
       int j = 0;
       int total = 0;
       for( j = 0; j < transitions.size(); j++ ) {
-        Edge temp = (Edge)transitions.elementAt( j );
+        Edge temp = transitions.elementAt( j );
         if( temp == e ) break;
         if( temp.fromState == e.fromState && temp.fromState == temp.toState )
           total += h + 2;
@@ -655,7 +655,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
     double dx = dragEndScreen.getX() - dragStartScreen.getX();
     double dy = dragEndScreen.getY() - dragStartScreen.getY();
     for( int i = 0; i < states.size(); i++ ) {
-      State current = (State)states.elementAt( i );
+      State current = states.elementAt( i );
       current.x += dx;
       current.y += dy;
     }
@@ -668,7 +668,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
     double dx = end.getX() - start.getX();
     double dy = end.getY() - start.getY();
     for( int i = 0; i < states.size(); i++ ) {
-      State current = (State)states.elementAt( i );
+      State current = states.elementAt( i );
       current.x += dx;
       current.y += dy;
     }
@@ -690,7 +690,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
         w = (int)Math.ceil( tempW );
         h = (int)Math.ceil( tempH );
         for( int i = 0; i < states.size(); i++ ) {
-          State current = (State)states.elementAt( i );
+          State current = states.elementAt( i );
           current.x *= (1 / zoomMultiplicationFactor);
           current.y *= (1 / zoomMultiplicationFactor);
         }
@@ -710,7 +710,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
         w *= ( zoomMultiplicationFactor );
         h *= ( zoomMultiplicationFactor );      
         for( int i = 0; i < states.size(); i++ ) {
-          State current = (State)states.elementAt( i );
+          State current = states.elementAt( i );
           current.x *= zoomMultiplicationFactor;
           current.y *= zoomMultiplicationFactor;
         }
@@ -739,7 +739,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
         w = (int)Math.ceil( tempW );
         h = (int)Math.ceil( tempH );
         for( int i = 0; i < states.size(); i++ ) {
-          State current = (State)states.elementAt( i );
+          State current = states.elementAt( i );
           current.x *= (1 / zoomMultiplicationFactor);
           current.y *= (1 / zoomMultiplicationFactor);
         }
@@ -755,7 +755,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
         w *= ( zoomMultiplicationFactor );
         h *= ( zoomMultiplicationFactor );        
         for( int i = 0; i < states.size(); i++ ) {
-          State current = (State)states.elementAt( i );
+          State current = states.elementAt( i );
           current.x *= zoomMultiplicationFactor;
           current.y *= zoomMultiplicationFactor;
         }

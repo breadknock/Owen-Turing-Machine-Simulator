@@ -295,7 +295,7 @@ public class MessagePanel extends JPanel {
 
   public void resetMachineAction() {
         for( int i = 0; i < machine.states.size(); i++ ) {
-          State n = (State)machine.states.elementAt( i );
+          State n = machine.states.elementAt( i );
           n.currentState = false;
           if( n.startState ) {
             n.currentState = true;
@@ -304,7 +304,7 @@ public class MessagePanel extends JPanel {
         }
         machine.currentEdge = null;
         for( int i = 0; i < machine.transitions.size(); i++ ) {
-          Edge n = (Edge)machine.transitions.elementAt( i );
+          Edge n = machine.transitions.elementAt( i );
           n.currentEdge = false;
         }
         machine.totalTransitions = 0;

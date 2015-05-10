@@ -171,7 +171,7 @@ public class NewTransitionDialog extends JDialog implements ActionListener, Docu
     }
     if( !edit ) {
       for( int i = 0; i < transitions.size(); i++ ) {
-        Edge n = (Edge)transitions.elementAt( i );
+        Edge n = transitions.elementAt( i );
         if( n.fromState == transition.fromState ) {
           if( n.oldChar == oldCharText.getText().charAt( 0 ) ) {
             WarningBox temp = new WarningBox(

@@ -24,8 +24,8 @@ public class TransitionCellRenderer extends JLabel implements ListCellRenderer<E
   
   public Component getListCellRendererComponent( JList<? extends Edge> list, Edge e,
       int index, boolean isSelected, boolean cellHasFocus ) {
-    setText( ( e ).listLabel() );
-    if( ( e ).currentEdge ) {
+    setText( e.listLabel() );
+    if( e.currentEdge ) {
       setBackground( list.getSelectionBackground() );
       setForeground( list.getSelectionForeground() );
     }

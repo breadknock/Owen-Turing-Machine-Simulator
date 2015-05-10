@@ -138,7 +138,7 @@ public class TMFileChooser extends JFileChooser
       saver.writeInt(graphpanel.transitions.size());
       for(int i = 0; i < graphpanel.transitions.size(); i++)
       {
-        Edge e = (Edge)graphpanel.transitions.elementAt(i);
+        Edge e = graphpanel.transitions.elementAt(i);
         saver.writeChar(e.oldChar);
         saver.writeChar(e.newChar);
         saver.writeInt(e.direction);
@@ -175,7 +175,7 @@ public class TMFileChooser extends JFileChooser
 
       for(int j = 0; j < graphpanel.states.size(); j++)
       {
-        State temp = (State)graphpanel.states.elementAt(j);
+        State temp = graphpanel.states.elementAt(j);
         if(!temp.finalState)
         {
           saver.print(temp.stateName);
@@ -198,11 +198,11 @@ public class TMFileChooser extends JFileChooser
       else
         saver.println("/*Explicit*/");
       saver.print("start -> ");
-      saver.print(((State)graphpanel.states.elementAt(start)).stateName);
+      saver.print((graphpanel.states.elementAt(start)).stateName);
       saver.println(";");
       for(int j = 0; j < graphpanel.transitions.size(); j++)
       {
-        Edge temp = (Edge)graphpanel.transitions.elementAt(j);
+        Edge temp = graphpanel.transitions.elementAt(j);
         saver.print(temp.fromState.stateName);
         saver.print(" -> ");
         if(temp.toState.finalState)
@@ -228,10 +228,10 @@ public class TMFileChooser extends JFileChooser
         for(int j = 0; j < graphpanel.states.size(); j++)
         {
           boolean zero = false, one = false;
-          State tempState = (State)graphpanel.states.elementAt(j);
+          State tempState = graphpanel.states.elementAt(j);
           for(int i = 0; i < graphpanel.transitions.size(); i++)
           {
-            Edge tempEdge = (Edge)graphpanel.transitions.elementAt(i);
+            Edge tempEdge = graphpanel.transitions.elementAt(i);
             if(tempEdge.fromState == tempState)
             {
               if(tempEdge.oldChar == '0')
@@ -317,7 +317,7 @@ public class TMFileChooser extends JFileChooser
        root.appendChild(states);
 
        for(int j = 0; j < graphpanel.states.size(); j++){
-           State temp = (State)graphpanel.states.elementAt(j);
+           State temp = graphpanel.states.elementAt(j);
            Element e = xmldoc.createElement("State_" + temp.stateName);
            states.appendChild(e);
            Element f = xmldoc.createElement("x");
@@ -342,7 +342,7 @@ public class TMFileChooser extends JFileChooser
        root.appendChild(transitions);
 
        for(int i = 0; i < graphpanel.transitions.size(); i++){
-           Edge temp = (Edge)graphpanel.transitions.elementAt(i);
+           Edge temp = graphpanel.transitions.elementAt(i);
            Element e = xmldoc.createElement("Transition_" + Integer.toString(i));
            transitions.appendChild(e);
            Element f = xmldoc.createElement("fromstate");
@@ -437,7 +437,7 @@ public void openFile(File open)
         toName = (String)opener.readObject();
         for(int i = 0; i < graphpanel.states.size(); i++)
         {
-          State temp = (State)graphpanel.states.elementAt(i);
+          State temp = graphpanel.states.elementAt(i);
           if(temp.x == fromX && temp.y == fromY && temp.stateName == fromName)
             from = temp;
           if(temp.x == toX && temp.y == toY && temp.stateName == toName)
@@ -459,7 +459,7 @@ public void openFile(File open)
       graphpanel.transitionpanel.getViewport().setView(transitions);
       for(int k = 0; k < graphpanel.states.size(); k++)
       {
-        State temp = (State)graphpanel.states.elementAt(k);
+        State temp = graphpanel.states.elementAt(k);
         temp.currentState = false;
         temp.highlight = false;
       }
@@ -512,7 +512,7 @@ public void openFile(File open)
         haltTransition = false;
         if(text.indexOf("start") != -1)
         {
-          State temp = (State)graphpanel.states.elementAt(0);
+          State temp = graphpanel.states.elementAt(0);
           temp.startState = false;
           int j = 0;
           while(text.charAt(j) == ' ' || text.charAt(j) == 9)
@@ -522,7 +522,7 @@ public void openFile(File open)
 		tempIndexTwo = text.indexOf(";");
 		tempString = text.substring(tempIndexOne+2,tempIndexTwo);
 
-          temp = (State)graphpanel.states.elementAt(Integer.valueOf(tempString).intValue());
+          temp = graphpanel.states.elementAt(Integer.valueOf(tempString).intValue());
           temp.startState = true;
           text = infile.readLine();
           continue;
@@ -546,15 +546,15 @@ public void openFile(File open)
 	tempIndexOne = text.indexOf("->");
 	tempIndexTwo = text.indexOf("label");
 	tempString = text.substring(0,tempIndexOne-1);
-        from = (State)graphpanel.states.elementAt(Integer.valueOf(tempString).intValue());
+        from = graphpanel.states.elementAt(Integer.valueOf(tempString).intValue());
         if(!haltTransition)
 	{
 	  tempString = text.substring(tempIndexOne+3,tempIndexTwo-2);
-          to = (State)graphpanel.states.elementAt(Integer.valueOf(tempString).intValue());
+          to = graphpanel.states.elementAt(Integer.valueOf(tempString).intValue());
 	}
         else
         {
-          to = (State)graphpanel.states.elementAt(graphpanel.states.size()-1);
+          to = graphpanel.states.elementAt(graphpanel.states.size()-1);
           to.finalState = true;
         }
         oldChar = text.charAt(tempIndexTwo+7);
@@ -590,7 +590,7 @@ public void openFile(File open)
       graphpanel.transitionpanel.getViewport().setView(transitions);
       for(int k = 0; k < graphpanel.states.size(); k++)
       {
-        State temp = (State)graphpanel.states.elementAt(k);
+        State temp = graphpanel.states.elementAt(k);
         temp.currentState = false;
         temp.highlight = false;
       }
@@ -645,7 +645,7 @@ public void openFile(File open)
                             if(!childnl.item(i).getNodeName().equals("#text")){
                                 statename = childnl.item(i).getNodeName().substring(6);
                                 graphpanel.addState(x, y, statename);
-                                State temp = (State)graphpanel.states.elementAt(nodecount);
+                                State temp = graphpanel.states.elementAt(nodecount);
                                 nodecount++;
                                 if(startstate == true){
                                     temp.startState = true;
@@ -700,12 +700,12 @@ public void openFile(File open)
                             if(!childnl.item(i).getNodeName().equals("#text")){
                                 State from = null, to = null;
                                 for(int m = 0; m < graphpanel.states.size(); m++){
-                                    State temp = (State)graphpanel.states.elementAt(m);
+                                    State temp = graphpanel.states.elementAt(m);
                                     if(temp.stateName.equals(fromstate)){
-                                        from = (State)graphpanel.states.elementAt(m);
+                                        from = graphpanel.states.elementAt(m);
                                     }
                                     if(temp.stateName.equals(tostate)){
-                                        to = (State)graphpanel.states.elementAt(m);
+                                        to = graphpanel.states.elementAt(m);
                                     }
                                 }
                                 Edge insert = new Edge(from, to);
@@ -729,7 +729,7 @@ public void openFile(File open)
       graphpanel.transitionpanel.getViewport().setView(transitions);
       for(int k = 0; k < graphpanel.states.size(); k++)
       {
-        State temp = (State)graphpanel.states.elementAt(k);
+        State temp = graphpanel.states.elementAt(k);
         temp.currentState = false;
         temp.highlight = false;
       }

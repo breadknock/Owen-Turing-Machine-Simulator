@@ -82,9 +82,9 @@ public class ExecutionSaver extends Thread
       {
         boolean print = false;
         Vector<?> temp = (Vector<?>)tapeStates.elementAt(i);
-        Integer tempLeft = (Integer)tapePositions.elementAt(i*3);
-        Integer tempRight = (Integer)tapePositions.elementAt(i*3 + 1);
-        Integer tempPos = (Integer)tapePositions.elementAt(i*3 + 2);
+        Integer tempLeft = tapePositions.elementAt(i*3);
+        Integer tempRight = tapePositions.elementAt(i*3 + 1);
+        Integer tempPos = tapePositions.elementAt(i*3 + 2);
         for(int j = furthestLeft; j <= furthestRight; j++)
         {
           if(j == tempPos.intValue())
@@ -111,7 +111,7 @@ public class ExecutionSaver extends Thread
             saver.print("</b>");
         }
         saver.print("&nbsp;&nbsp;State ");
-        saver.print((String)currentStates.elementAt(i));
+        saver.print(currentStates.elementAt(i));
         saver.println("<br>");
         saveProgressDialog.saveProgressBar.setValue(2*number -transitionsMade + i);
       }

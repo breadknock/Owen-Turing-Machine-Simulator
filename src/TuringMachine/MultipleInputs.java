@@ -188,7 +188,7 @@ public class MultipleInputs extends JFrame {
         
         /* RESET MACHINE */
         for( int x = 0; x < machine.states.size(); x++ ) {
-          State n = (State)machine.states.elementAt( x );
+          State n = machine.states.elementAt( x );
           n.currentState = false;
           if( n.startState ) {
             n.currentState = true;
@@ -197,7 +197,7 @@ public class MultipleInputs extends JFrame {
         }
         machine.currentEdge = null;
         for( int x = 0; x < machine.transitions.size(); x++ ) {
-          Edge n = (Edge)machine.transitions.elementAt( x );
+          Edge n = machine.transitions.elementAt( x );
           n.currentEdge = false;
         }
         machine.totalTransitions = 0;

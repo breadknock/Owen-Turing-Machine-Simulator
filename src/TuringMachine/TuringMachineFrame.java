@@ -95,11 +95,14 @@ public class TuringMachineFrame extends JFrame {
    * The guts of the program - the main TM simulator
    */
   TuringMachineSimulator machine;
+  
+  TuringMachineApp parent;
 
   /**
    * Construct the frame
    */
-  public TuringMachineFrame(File file) {
+  public TuringMachineFrame(TuringMachineApp tma, File file) {
+	parent = tma;
     enableEvents(AWTEvent.WINDOW_EVENT_MASK);
 	machine = new TuringMachineSimulator();
 	if(file != null) {
@@ -113,8 +116,8 @@ public class TuringMachineFrame extends JFrame {
     }
   }
   
-  public TuringMachineFrame() {
-	  this(null);
+  public TuringMachineFrame(TuringMachineApp tma) {
+	  this(tma,null);
   }
 
   /**
@@ -139,7 +142,7 @@ public class TuringMachineFrame extends JFrame {
     jMenuFileNew.setText("New");
     jMenuFileNew.addActionListener(new ActionListener() {
     	public void actionPerformed(ActionEvent e) {
-    		TuringMachineApp.createNewInstance();
+    		parent.createNewInstance(null);
     	}
     });
     jMenuFileClear.setText("Clear");
@@ -223,7 +226,7 @@ public class TuringMachineFrame extends JFrame {
    * @param e ActionEvent dummy variable
    */
   public void jMenuFileExit_actionPerformed(ActionEvent e) {
-	TuringMachineApp.close();
+	parent.close();
     dispose();
   }
 
