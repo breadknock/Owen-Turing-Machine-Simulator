@@ -48,11 +48,12 @@ import org.w3c.dom.NodeList;
 public class TMFileChooser extends JFileChooser
 {
 
+	
   private static final long serialVersionUID = 8973908592870498372L;
   TapePanel tapepanel;
   GraphPanel graphpanel;
   public JTextField maximum;
-  public String curdir;
+  public static String curdir;
 
   public TMFileChooser()
   {
@@ -133,16 +134,7 @@ public class TMFileChooser extends JFileChooser
       FileOutputStream outfile = new FileOutputStream(save);
       ObjectOutputStream saver = new ObjectOutputStream(outfile);
       saver.writeObject(graphpanel.states);
-      /*saver.writeInt(graphpanel.states.size());
-      for(int j = 0; j < graphpanel.states.size(); j++)
-      {
-        State s = (State)graphpanel.states.elementAt(j);
-        saver.writeDouble(s.x);
-        saver.writeDouble(s.y);
-        saver.writeChars(s.stateName);
-        saver.writeBoolean(s.finalState);
-        saver.writeBoolean(s.startState);
-      }*/
+
       saver.writeInt(graphpanel.transitions.size());
       for(int i = 0; i < graphpanel.transitions.size(); i++)
       {
@@ -409,6 +401,7 @@ public void openFile(File open)
   {
 	  graphpanel.machine.tape.editCellAt(-1, -1);
       graphpanel.machine.tape.clearSelection();
+	  System.out.println(open.toString());
     try (
     	FileInputStream infile = new FileInputStream(open);
     	ObjectInputStream opener = new ObjectInputStream(infile);

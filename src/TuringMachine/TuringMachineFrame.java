@@ -90,19 +90,27 @@ public class TuringMachineFrame extends JFrame {
   /**
    * The guts of the program - the main TM simulator
    */
-  TuringMachineSimulator machine = new TuringMachineSimulator();
+  TuringMachineSimulator machine;
 
   /**
    * Construct the frame
    */
-  public TuringMachineFrame() {
+  public TuringMachineFrame(File file) {
     enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+	machine = new TuringMachineSimulator();
+	if(file != null) {
+		openFile(file);
+	}
     try {
       jbInit();
     }
     catch(Exception e) {
       e.printStackTrace();
     }
+  }
+  
+  public TuringMachineFrame() {
+	  this(null);
   }
 
   /**
@@ -230,16 +238,22 @@ public class TuringMachineFrame extends JFrame {
     int confirm = filechooser.showOpenDialog(this);
     if(confirm == TMFileChooser.APPROVE_OPTION)
     {
-      filechooser.curdir = filechooser.getCurrentDirectory().toString();
-      if(filechooser.getSelectedFile().getName().endsWith("tm"))
-        filechooser.openFile(filechooser.getSelectedFile());
-      else if(filechooser.getSelectedFile().getName().endsWith("tmo"))
-        filechooser.openTMOFile(filechooser.getSelectedFile());
-      else if(filechooser.getSelectedFile().getName().endsWith("txt"))
-        filechooser.openTapeFile(filechooser.getSelectedFile());
-      else
-          filechooser.openXMLFile(filechooser.getSelectedFile());
+    	openFile(filechooser.getSelectedFile());
     }
+    
+  }
+  
+  public void openFile(File file) {
+	  TMFileChooser filechooser = new TMFileChooser();
+	  filechooser.setGraphPanel(machine.graphpanel);
+	  if(file.getName().endsWith("tm"))
+	    filechooser.openFile(file);
+	  else if(file.getName().endsWith("tmo"))
+	    filechooser.openTMOFile(filechooser.getSelectedFile());
+	  else if(file.getName().endsWith("txt"))
+	    filechooser.openTapeFile(filechooser.getSelectedFile());
+	  else
+	    filechooser.openXMLFile(filechooser.getSelectedFile());
   }
   /**
    * File | Save action - brings up a TMFileChooser dialog
@@ -251,7 +265,7 @@ public class TuringMachineFrame extends JFrame {
     int confirm = filechooser.showSaveDialog(this);
     if(confirm == TMFileChooser.APPROVE_OPTION)
     {
-      filechooser.curdir = filechooser.getCurrentDirectory().toString();
+      TMFileChooser.curdir = filechooser.getCurrentDirectory().toString();
       File newSelect;
       File select = filechooser.getSelectedFile();
       if(select.getName().endsWith(".tm"))
@@ -286,7 +300,7 @@ public class TuringMachineFrame extends JFrame {
     int confirm = filechooser.showSaveDialog(this);
     if(confirm == TMFileChooser.APPROVE_OPTION)
     {
-      filechooser.curdir = filechooser.getCurrentDirectory().toString();
+      TMFileChooser.curdir = filechooser.getCurrentDirectory().toString();
       File newSelect;
       File select = filechooser.getSelectedFile();
       if(select.getName().endsWith(".tmo"))
@@ -317,7 +331,7 @@ public class TuringMachineFrame extends JFrame {
     int confirm = filechooser.showSaveDialog(this);
     if(confirm == TMFileChooser.APPROVE_OPTION)
     {
-      filechooser.curdir = filechooser.getCurrentDirectory().toString();
+      TMFileChooser.curdir = filechooser.getCurrentDirectory().toString();
       File newSelect;
       File select = filechooser.getSelectedFile();
       if(select.getName().endsWith(".xml"))
@@ -348,7 +362,7 @@ public class TuringMachineFrame extends JFrame {
     int confirm = filechooser.showSaveDialog(this);
     if(confirm == TMFileChooser.APPROVE_OPTION)
     {
-      filechooser.curdir = filechooser.getCurrentDirectory().toString();
+      TMFileChooser.curdir = filechooser.getCurrentDirectory().toString();
       File newSelect;
       File select = filechooser.getSelectedFile();
       if(select.getName().endsWith(".txt"))
@@ -379,7 +393,7 @@ public class TuringMachineFrame extends JFrame {
     int confirm = filechooser.showSaveDialog(this);
     if(confirm == TMFileChooser.APPROVE_OPTION)
     {
-      filechooser.curdir = filechooser.getCurrentDirectory().toString();
+      TMFileChooser.curdir = filechooser.getCurrentDirectory().toString();
       File newSelect;
       File select = filechooser.getSelectedFile();
       if(select.getName().endsWith(".txt"))
@@ -414,7 +428,7 @@ public class TuringMachineFrame extends JFrame {
     int confirm = filechooser.showSaveDialog(this);
     if(confirm == TMFileChooser.APPROVE_OPTION)
     {
-      filechooser.curdir = filechooser.getCurrentDirectory().toString();
+      TMFileChooser.curdir = filechooser.getCurrentDirectory().toString();
       File newSelect;
       File select = filechooser.getSelectedFile();
       if(select.getName().endsWith(".html"))

@@ -2,6 +2,7 @@ package TuringMachine;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.File;
 
 import javax.swing.UIManager;
 
@@ -16,8 +17,8 @@ public class TuringMachineApp {
   private boolean packFrame = false;
 
   // Construct the application
-  public TuringMachineApp() {
-    TuringMachineFrame frame = new TuringMachineFrame();
+  public TuringMachineApp(File inputFile) {
+    TuringMachineFrame frame = new TuringMachineFrame(inputFile);
     // Validate frames that have preset sizes
     // Pack frames that have useful preferred size info, e.g. from their layout
     if( packFrame ) {
@@ -49,7 +50,11 @@ public class TuringMachineApp {
     catch ( Exception e ) {
       e.printStackTrace();
     }
+    File file = null;
+    if(args.length > 0) {
+    	file = new File(args[0]);
+    }
 
-    new TuringMachineApp();
+    new TuringMachineApp(file);
   }
 }
