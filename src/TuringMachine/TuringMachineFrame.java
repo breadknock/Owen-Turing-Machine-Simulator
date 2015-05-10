@@ -110,7 +110,6 @@ public class TuringMachineFrame extends JFrame {
    */
   public void jbInit() throws Exception  {
 
-    //setIconImage(Toolkit.getDefaultToolkit().createImage(TuringMachineFrame.class.getResource("[Your Icon]")));
     contentPane = (JPanel) this.getContentPane();
     contentPane.setLayout(borderLayout1);
     this.setSize(new Dimension(800, 600));
@@ -196,12 +195,9 @@ public class TuringMachineFrame extends JFrame {
     jMenuBar1.add(jMenuHelp);
     this.setJMenuBar(jMenuBar1);
 
-    //contentPane.add(graphtoolbar, BorderLayout.NORTH);
     contentPane.add(statusBar, BorderLayout.SOUTH);
     contentPane.add(machine, BorderLayout.CENTER);
-    //contentPane.add(graphpanel, BorderLayout.CENTER);
-    //contentPane.add(tapepanel, BorderLayout.SOUTH);
-    //graphpanel.start();
+
   }
   /**
    * File | Exit action - exits the program

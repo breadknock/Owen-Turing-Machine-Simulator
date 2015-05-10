@@ -479,14 +479,8 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
     }
     else if( graphtoolbar.selectionMode == GraphToolBar.INSERTSTATE ) {
       if( pick != null ) {
-          //TODO: Find a way to change the state (double clicking)
         pick.x = e.getX();
         pick.y = e.getY();
-        //NewStateDialog newState = new NewStateDialog( pick, states );
-        //newState.pack();
-        //newState.center();
-        //newState.validate();
-        //newState.setVisible( true );
         pick = null;
       }
     }
@@ -639,7 +633,6 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
     return false;
   }
 
-  //TODO implement method
   private boolean nameAlreadyExists( String name ) {
       for(State s : states) {
           if(s.stateName.equals(name)) {

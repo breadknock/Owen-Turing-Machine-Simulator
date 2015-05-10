@@ -39,10 +39,4 @@ public class TransitionCellRenderer extends JLabel implements ListCellRenderer<E
 
 }
 
-/**
- * List Model for the TransitionsPane - Maintains list of edges sorted by
- * starting state
- * 
- * @author Owen F. Kellett
- * @version 1.0
- */
+

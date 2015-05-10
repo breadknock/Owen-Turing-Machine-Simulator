@@ -42,9 +42,4 @@ public class TransitionsPane extends JScrollPane {
   }
 }
 
-/**
- * Cell renderer for the TransitionsPane
- * 
- * @author Owen F. Kellett
- * @version 1.0
- */
+

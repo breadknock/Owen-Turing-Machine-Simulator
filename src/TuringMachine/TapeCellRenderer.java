@@ -7,28 +7,15 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
 /**
- * <p>
- * Title:
- * </p>
- * <p>
- * Description:
- * </p>
- * <p>
- * Copyright: Copyright (c) 2002
- * </p>
- * <p>
- * Company:
- * </p>
+ * Cell renderer for the TransitionsPane
  * 
- * @author unascribed
+ * @author Owen F. Kellett
  * @version 1.0
  */
 
 
 public class TapeCellRenderer extends DefaultTableCellRenderer {
-	  /**
-		 * 
-		 */
+
 	  private static final long serialVersionUID = 1L;
 
 	  public TapeCellRenderer() {

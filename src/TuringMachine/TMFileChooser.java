@@ -512,7 +512,6 @@ public void openFile(File open)
       text = infile.readLine();
       if(text.endsWith("/*Implicit*/"))
          implicit = true;
-      //text = infile.readLine(); //start transition (ignored)
 
       text = infile.readLine();
       while(!text.endsWith("/*EndGraphOutput*/"))

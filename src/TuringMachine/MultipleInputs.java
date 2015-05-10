@@ -202,8 +202,6 @@ public class MultipleInputs extends JFrame {
         }
         machine.totalTransitions = 0;
         mp.updateLabels( machine.nonBlanks, machine.totalTransitions );
-       // machine.leftMost = machine.tapePos;
-        //machine.rightMost = machine.tapePos;
         mp.addMessage( "Machine Reset" );
   
         /* RUN */

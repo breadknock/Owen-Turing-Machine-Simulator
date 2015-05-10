@@ -34,9 +34,7 @@ import javax.swing.JTextField;
  */
 
 public class EditStateDialog extends JDialog {
-  /**
-	 * 
-	 */
+
   private static final long serialVersionUID = 8314741997670570749L;
   JLabel stateName = new JLabel( "State Name: ", JLabel.RIGHT );
   JTextField stateText = new JTextField();

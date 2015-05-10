@@ -49,7 +49,7 @@ public class TapeEditor extends JTextField implements TableCellEditor
         return this;
     }
 
-    // Retrieve e dited value
+    // Retrieve edited value
     @Override
     public Object getCellEditorValue()
     {

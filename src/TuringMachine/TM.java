@@ -47,18 +47,12 @@ public class TM implements Runnable {
   MessagePanel messages;
   TransitionsPane transitionpanel;
 
-  // TapePanel display;
-
   public TM() {
     initMachine( TAPESIZE / 2, "", new StringBuffer( "" ) );
-    // tapepanel.getViewport().setView(tape);
   }
   
   
 
-  /*
-   * public void setTape(TapePanel tape) { // display = tape; }
-   */
   public void setTransitions( DefaultListModel<Edge> transitions ) {
     this.transitions = transitions;
   }
@@ -113,7 +107,6 @@ public class TM implements Runnable {
       StringBuffer errorMsg ) {
 
     this.initPos = initPos;
-    // int numChars = initChars.length();
     Vector<Character> tapeIndicator = new Vector<Character>();
     Vector<Character> tapeData = new Vector<Character>();
     for( int i = 0; i < TAPESIZE; i++ ) {
@@ -127,7 +120,6 @@ public class TM implements Runnable {
     tape = new TapeTable( tapemodel , this);
     tape.setAutoResizeMode( JTable.AUTO_RESIZE_OFF );
     tape.getTableHeader().setReorderingAllowed(false);
-    //tape.setAutoCreateColumnsFromModel(false);
     for( int j = 0; j < TAPESIZE; j++ ) {
       TableColumn col = tape.getColumnModel().getColumn( j );
       col.setResizable(false);
@@ -145,13 +137,7 @@ public class TM implements Runnable {
     tape.scrollRectToVisible( tape.getCellRect( 0, tapePos - 5, true ) );
     tape.scrollRectToVisible( tape.getCellRect( 0, tapePos + 5, true ) );
     initNonBlanks = 0;
-    /*
-     * for (int i=0; i < numChars; i++) { c = initChars.charAt(i); if (c == '_')
-     * c = ' '; if (!validTapeChar(c)) {
-     * errorMsg.append("Invalid tape character '" + c + "'"); return false; }
-     * tape.setValueAt(new Character(c), 2, initPos+i); if (c != ' ')
-     * initNonBlanks++; }
-     */
+
     nonBlanks = initNonBlanks;
     totalTransitions = 0;
 
@@ -268,7 +254,6 @@ public class TM implements Runnable {
     clearEdge();
     moving = STAY;
     tape.setEnabled(true);
-    // display.repaint();
   }
 
   public String transition() {

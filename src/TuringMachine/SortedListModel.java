@@ -8,10 +8,15 @@ import javax.swing.DefaultListModel;
  * @author Owen F. Kellett
  * @version 1.0
  */
+
+/**
+ * List Model for the TransitionsPane - Maintains list of edges sorted by
+ * starting state
+ * 
+ * @author Owen F. Kellett
+ * @version 1.0
+ */
 public class SortedListModel extends DefaultListModel<Edge> {
-  /**
-	 * 
-	 */
   private static final long serialVersionUID = 7273332800366200363L;
 
   public SortedListModel() {
@@ -27,10 +32,10 @@ public class SortedListModel extends DefaultListModel<Edge> {
   public void addSortedElement( Edge e ) {
     int j = 0;
     for( j = 0; j < size(); j++ ) {
-      if( ( (Edge)getElementAt( j ) ).fromState.stateName
-          .compareTo( ( e ).fromState.stateName ) < 0 )
+      if((getElementAt(j)).fromState.stateName
+          .compareTo((e).fromState.stateName)< 0)
         ;
-      else if( ( (Edge)getElementAt( j ) ).fromState.stateName
+      else if( ( getElementAt( j ) ).fromState.stateName
           .compareTo( ( e ).fromState.stateName ) == 0 ) {
         if( ( getElementAt( j ) ).oldChar < ( e ).oldChar )
           ;
@@ -45,7 +50,7 @@ public class SortedListModel extends DefaultListModel<Edge> {
       }
     }
     if( j > 0 && j == size() ) super.addElement( e );
-    if( size() == 0 ) super.addElement( e );
+    if( isEmpty() ) super.addElement( e );
   }
 
   public void update() {

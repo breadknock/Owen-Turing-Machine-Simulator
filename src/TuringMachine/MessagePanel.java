@@ -56,7 +56,6 @@ public class MessagePanel extends JPanel {
   // references to exterior components
   TM machine;
   Thread execution;
-  // TapePanel tapeDisplay;
 
   public MessagePanel() {
     setLayout( new BorderLayout() );
@@ -127,32 +126,6 @@ public class MessagePanel extends JPanel {
     add( scrollmessages, BorderLayout.CENTER );
     add( optionspanel, BorderLayout.EAST );
 
-    /*
-     * setLayout(gbl);
-     * 
-     * // add current state label gbcon.gridx = 0; gbcon.gridy = 0;
-     * gbcon.gridwidth = 6; gbcon.anchor = GridBagConstraints.NORTH; //
-     * gbcon.weighty = 0.1; gbl.setConstraints(currentState, gbcon);
-     * add(currentState);
-     * 
-     * // add start, stop, and step control buttons gbcon.gridy = 1;
-     * gbcon.gridwidth = 1; gbcon.insets = new Insets(0,0,0,40); //gbcon.weightx
-     * = 0.2; gbcon.weighty = 0.1; gbl.setConstraints(start, gbcon); add(start);
-     * gbcon.gridx = 1; gbl.setConstraints(stop, gbcon); add(stop); gbcon.gridx
-     * = 2; gbl.setConstraints(resume, gbcon); add(resume); gbcon.gridx = 3;
-     * gbl.setConstraints(step, gbcon); add(step);
-     * 
-     * // add speed pull-down list control gbcon.gridx = 4; gbcon.insets = new
-     * Insets(0,0,0,5); gbl.setConstraints(speedLabel, gbcon); add(speedLabel);
-     * gbcon.gridx = 5; gbl.setConstraints(speed, gbcon); add(speed);
-     * 
-     * // add message area gbcon.gridx = 0; gbcon.gridy = 2; gbcon.insets = new
-     * Insets(0,0,5,0); gbcon.gridwidth = 6; gbcon.fill =
-     * GridBagConstraints.BOTH; gbcon.anchor = GridBagConstraints.SOUTH;
-     * gbcon.weightx = 0; //gbcon.weighty = 0.8;
-     * gbl.setConstraints(scrollmessages, gbcon); add(scrollmessages);
-     */
-
     start.addActionListener( new ActionListener() {
       public void actionPerformed( ActionEvent e ) {
     	 machine.tape.editCellAt(-1, -1);
@@ -160,9 +133,6 @@ public class MessagePanel extends JPanel {
         if( execution.isAlive() )
           addMessage( "Already running" );
         else {
-          // StringBuffer errorMsg = new StringBuffer(50);
-          // boolean success = true;
-          // machine.initMachine(5000, "", new StringBuffer(""));
           machine.setSpeed( (String)speed.getSelectedItem() );
           addMessage( "Running..." );
           execution = new Thread( machine );
@@ -339,8 +309,6 @@ public class MessagePanel extends JPanel {
         }
         machine.totalTransitions = 0;
         updateLabels( machine.nonBlanks, machine.totalTransitions );
-//        machine.leftMost = machine.tapePos;
-//        machine.rightMost = machine.tapePos;
         addMessage( "Machine Reset" );
 
   }
@@ -352,10 +320,6 @@ public class MessagePanel extends JPanel {
   public void setExecution( Thread execution ) {
     this.execution = execution;
   }
-
-  /*
-   * public void setTapeDisplay(TapePanel display) { // tapeDisplay = display; }
-   */
 
   public void addMessage( String msg ) {
     messages.append( msg + "\n" );
@@ -389,33 +353,6 @@ public class MessagePanel extends JPanel {
     addMessage( "" + machine.totalTransitions + " total transitions" );
     addMessage( "" + machine.nonBlanks + " non-blank characters on tape" );
   }
-
-  /*
-   * public boolean action(Event evt, Object arg) {
-   * 
-   * 
-   * if (evt.target instanceof JButton) { String command =
-   * ((JButton)evt.target).getLabel(); addMessage(command); int result; if
-   * (command.equals("Step")) { result = machine.transition(); machine.moving =
-   * TM.STAY; // tapeDisplay.repaint(); if (result == TM.HALTED)
-   * addMessage("Machine is halted"); else if (result == TM.ABNORMAL)
-   * addMessage("The machine has run\noff the end of the tape"); else if (result
-   * == TM.NOTFOUND) addMessage("No applicable transition found"); else if
-   * (result == TM.NOPROG) addMessage("No program entered"); return true; } else
-   * if (command.equals("Start") || command.equals("Resume")) { if
-   * (execution.isAlive()) addMessage("Already running"); else { StringBuffer
-   * errorMsg = new StringBuffer(50); boolean success = true; if
-   * (command.equals("Start")) { System.out.println("Started");
-   * machine.initMachine(5000, "", new StringBuffer(""));
-   * machine.setSpeed((String)speed.getSelectedItem());
-   * addMessage("Running..."); execution = new Thread(machine);
-   * execution.start(); } else
-   * addMessage("Error initializing machine:\n"+errorMsg); } } else if
-   * (command.equals("Stop")) { if (execution.isAlive()) { execution.stop();
-   * machine.moving = TM.STAY; // tapeDisplay.repaint();
-   * showResults(TM.USERINT); } else addMessage("Machine is not running"); } }
-   * return false; }
-   */
 
   public Dimension getMinimumSize() {
     return new Dimension( 500, 150 );

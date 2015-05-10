@@ -30,6 +30,11 @@ public class TapeTableModel extends DefaultTableModel {
   public TapeTableModel() {
     super();
   }
+  
+  @Override
+  public Class<?> getColumnClass(int columnIndex) {
+	  return Character.class;
+  }
 
   public void setColumnName( Object value, int col ) {
 
