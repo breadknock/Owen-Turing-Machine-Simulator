@@ -463,6 +463,16 @@ public void openFile(File open)
         temp.currentState = false;
         temp.highlight = false;
       }
+      if(graphpanel.transitions.size() > 0) {
+    	  Edge e = graphpanel.transitions.elementAt(0);
+    	  if(e.newChar == 0 || e.direction == TM.NULL) {
+    		  graphpanel.machine.machineType = TM.QUADRUPLE;
+    	  } else {
+    		  graphpanel.machine.machineType = TM.QUINTUPLE;
+    	  }
+      } else {
+    	  graphpanel.machine.machineType = MachineTypePicker.getNewMachineType();
+      }
     }
     catch(Exception e){e.printStackTrace();}
   }

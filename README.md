@@ -14,11 +14,11 @@ Currently planned changes:
     + ~~add ability to double click to change node name~~
 - shortcut buttons
 + ~~Create new Turing Machine~~
-- Show number of states and transitions
+- ~~Show number of states and transitions~~
 - Show number transitions when doing multiple inputs
 
 - ~~Only allow for user to select TM type when a new TM is created~~
-    - Automatically detect TM type when opening machine
+    - ~~Automatically detect TM type when opening machine~~
 - ~~Allow user to open Turing Machine file from command-line~~
 - Allow user to select TM type on command-line
 - Allow for user to create comments
