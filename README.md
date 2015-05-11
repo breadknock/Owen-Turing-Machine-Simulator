@@ -18,8 +18,8 @@ Currently planned changes:
 - ~~Allow user to open Turing Machine file from command-line~~
 - ~~Change "New TM" to clear, and give a "New TM" option that opens a new window~~
 - ~~Fix behavior when user presses the close button on a pop-up~~
+- ~~Allow user to select TM type on command-line~~
 - shortcut buttons
-- Allow user to select TM type on command-line
 - Allow for user to create comments
 - Allow for user to rectangularly select nodes & transitions
 - Allow for user to copy and paste nodes and transitions

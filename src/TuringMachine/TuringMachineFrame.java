@@ -101,13 +101,17 @@ public class TuringMachineFrame extends JFrame {
   /**
    * Construct the frame
    */
-  public TuringMachineFrame(TuringMachineApp tma, File file) {
+  public TuringMachineFrame(TuringMachineApp tma, File file, int machineType) {
+
 	parent = tma;
     enableEvents(AWTEvent.WINDOW_EVENT_MASK);
 	machine = new TuringMachineSimulator();
+	if(machineType > 0) {
+		machine.machine.machineType = machineType;
+	}
 	if(file != null) {
 		openFile(file);
-	} else {
+	} else if(machineType == 0) {
 		machine.machine.machineType = MachineTypePicker.getNewMachineType();
 	}
     try {
@@ -119,7 +123,7 @@ public class TuringMachineFrame extends JFrame {
   }
   
   public TuringMachineFrame(TuringMachineApp tma) {
-	  this(tma,null);
+	  this(tma,null,0);
   }
 
   /**
