@@ -15,7 +15,7 @@ Currently planned changes:
 - shortcut buttons
 + ~~Create new Turing Machine~~
 - ~~Show number of states and transitions~~
-- Show number transitions when doing multiple inputs
+- ~~Show number transitions when doing multiple inputs~~
 
 - ~~Only allow for user to select TM type when a new TM is created~~
     - ~~Automatically detect TM type when opening machine~~

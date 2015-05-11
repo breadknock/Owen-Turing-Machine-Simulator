@@ -29,9 +29,11 @@ public class MultipleInputs extends JFrame {
   private Thread execution;
   private Vector<JTextField> inputs;
   private Vector<JTextField> outputs;
+  private Vector<JTextField> transitions;
 
   private JLabel inLabel;
   private JLabel outLabel;
+  private JLabel transitionLabel;
   private JButton run;
   private JButton stop;
   
@@ -79,13 +81,17 @@ public class MultipleInputs extends JFrame {
 
     inLabel = new JLabel( "Inputs" );
     outLabel = new JLabel( "Outputs" );
+    transitionLabel = new JLabel("Transitions");
     inLabel.setVerticalAlignment( SwingConstants.BOTTOM );
     inLabel.setHorizontalAlignment( SwingConstants.CENTER );
     outLabel.setVerticalAlignment( SwingConstants.BOTTOM );
     outLabel.setHorizontalAlignment( SwingConstants.CENTER );
+    transitionLabel.setVerticalAlignment( SwingConstants.BOTTOM );
+    transitionLabel.setHorizontalAlignment( SwingConstants.CENTER );
 
     inputs = new Vector<JTextField>();
     outputs = new Vector<JTextField>();
+    transitions = new Vector<JTextField>();
     for( int i = 0; i < n; ++i ) {
       inputs.add( new JTextField() );
       JTextField temp2 = new JTextField("0") ;
@@ -98,6 +104,7 @@ public class MultipleInputs extends JFrame {
       temp.setHorizontalAlignment( JTextField.CENTER );
       temp.setCaretPosition(0);
       outputs.add( temp );
+      transitions.add(temp2);
     }
 
     run = new JButton( "Run" );
@@ -105,9 +112,11 @@ public class MultipleInputs extends JFrame {
 
     this.add( inLabel );
     this.add( outLabel );
+    this.add( transitionLabel );
     for( int i = 0; i < n; ++i ) {
       this.add( inputs.get( i ) );
       this.add( outputs.get( i ) );
+      this.add( transitions.get( i ) );
     }
     this.add( run );
     this.add( stop );
@@ -214,6 +223,7 @@ public class MultipleInputs extends JFrame {
   
         /* PRINT OUTPUT TO OUTPUT TEXTFIELDS */
         outputs.get( i ).setText( machine.printTape() );
+        transitions.get( i ).setText( String.valueOf(machine.totalTransitions));
       }
     }
     
