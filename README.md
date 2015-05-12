@@ -1,6 +1,6 @@
 A simple Turing Machine Simulator
 
-Continued from the previous project by Owen F. Kellett, Matthew, Christopher French
+Continued from the previous project by Owen F. Kellett, Matthew Perry, Christopher French
 
 Currently planned changes:
 
