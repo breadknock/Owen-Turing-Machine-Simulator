@@ -1,0 +1,25 @@
+OWEN TM v4 - Christopher Brenon
+New Features:
+- Added a Reset All button to the menu to reset, clear tape, and load the input tape.
+- When working with a quadruple machine, each field (new state and move direction) disables the other field when it changes from NULL, so the user knows that they can't enter both.
+- When a node is inserted, no window pops up asking for the node name, allowing for quicker placement of nodes.
+- If a node is double clicked in select mode, its name can be changed.
+- The umber of states and transitions is shown on the bottom of the screen
+- Program asks for quadruple or quintuple machine at the very start - removes dropdown inside
+- Allow user to determine type at command-line
+- Allow user to specify input file at command-line
+- Add option to open new window with "New" in file menu
+- Allow user to clear current TM with "Clear" option in file menu
+
+Bugfixes:
+- When nodes are created, they find the lowest unused number as their name
+- Two nodes cannot both have the same name
+
+Known bugs:
+- If a file is saved when the zoom is not 0, the nodes will have their location saved as their apparent location, rather than absolute location.
+- Count of states is not updated until next action is taken when a node is deleted
+
+Additional feature ideas:
+- Ability to add comments to the drawing area
+- Allow for mass copy-pasting and deleting of nodes and transitions
+- Add shortcut buttons (for saving, changing modes, etc)
