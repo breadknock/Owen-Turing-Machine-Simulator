@@ -60,6 +60,10 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
   private int minZoomLevel = -10;
   private int maxZoomLevel = 10;
   private double zoomMultiplicationFactor = 1.1;
+  
+  private double currentZoomFactor = 1.0;
+  private double currentXOffset = 0.0;
+  private double currentYOffset = 0.0;
 
   private Point dragStartScreen;
   private Point dragEndScreen;
@@ -88,6 +92,22 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
   
   public void setSlider( JSlider slider ) {
     this.zoomSlider = slider;    
+  }
+  
+  public double transformX(double x) {
+	  return (x+currentXOffset)*zoomMultiplicationFactor;
+  }
+  
+  public double transformY(double y) {
+	  return (y+currentYOffset)*zoomMultiplicationFactor;
+  }
+  
+  public double rtransformX(double x) {
+	  return x/zoomMultiplicationFactor-currentXOffset;
+  }
+  
+  public double rtransformY(double y) {
+	  return y/zoomMultiplicationFactor-currentYOffset;
   }
   
   public void run() {
@@ -133,9 +153,8 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
         RenderingHints.VALUE_ANTIALIAS_ON );
     g.setRenderingHint( RenderingHints.KEY_STROKE_CONTROL,
         RenderingHints.VALUE_STROKE_PURE );
-
-    int x = (int)n.x;
-    int y = (int)n.y;
+    int x = (int)(n.x*currentZoomFactor);
+    int y = (int)(n.y*currentZoomFactor);
     if( n == pick )
       g.setColor( selectedStateColor );
     else if( n.currentState )
@@ -390,6 +409,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
       }
     }
   }
+  
 
   public void mousePressed( MouseEvent e ) {
     if( graphtoolbar.selectionMode == GraphToolBar.SELECT ) {
@@ -430,7 +450,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
       }
     }
     else if( graphtoolbar.selectionMode == GraphToolBar.INSERTSTATE ) {
-      addState( e.getX(), e.getY(), getNextNodeName() );
+      addState( (e.getX() - currentXOffset)*zoomMultiplicationFactor, e.getY(), getNextNodeName() );
       pick = states.lastElement();
     }
     else if( graphtoolbar.selectionMode == GraphToolBar.INSERTEDGE ) {
@@ -680,6 +700,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
     int wheelRotation = e.getWheelRotation();
     if( wheelRotation > 0 ) {
       if( zoomLevel < maxZoomLevel ) {
+    	 currentZoomFactor /= zoomMultiplicationFactor;
         zoomLevel++;
         Font oldF = getFont();
         Font newF = oldF.deriveFont( (float)( oldF.getSize2D() * ( 1 / zoomMultiplicationFactor ) )  );
@@ -690,11 +711,6 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
         tempH *= (1 / zoomMultiplicationFactor);
         w = (int)Math.ceil( tempW );
         h = (int)Math.ceil( tempH );
-        for( int i = 0; i < states.size(); i++ ) {
-          State current = states.elementAt( i );
-          current.x *= (1 / zoomMultiplicationFactor);
-          current.y *= (1 / zoomMultiplicationFactor);
-        }
         double x = ( e.getX() * (1 / zoomMultiplicationFactor) );
         double y = ( e.getY() * (1 / zoomMultiplicationFactor) );
         Point2D.Double p = new Point2D.Double( x, y );
@@ -705,16 +721,12 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
     else {
       if( zoomLevel > minZoomLevel ) {
         zoomLevel--;
+        currentZoomFactor *= zoomMultiplicationFactor;
         Font oldF = getFont();
         Font newF = oldF.deriveFont( (float)( oldF.getSize2D() * zoomMultiplicationFactor )  );
         setFont( newF );
         w *= ( zoomMultiplicationFactor );
         h *= ( zoomMultiplicationFactor );      
-        for( int i = 0; i < states.size(); i++ ) {
-          State current = states.elementAt( i );
-          current.x *= zoomMultiplicationFactor;
-          current.y *= zoomMultiplicationFactor;
-        }
         double x = ( e.getX() * zoomMultiplicationFactor );
         double y = ( e.getY() * zoomMultiplicationFactor );
         Point2D.Double p = new Point2D.Double( x, y );
@@ -729,6 +741,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
     int newLevel = -1 * ((JSlider)e.getSource()).getValue();
     if( newLevel > zoomLevel ) {
       for( int j = 0; j < (newLevel - zoomLevel); ++j ) {
+     	currentZoomFactor /= zoomMultiplicationFactor;
         zoomLevel++;
         Font oldF = getFont();
         Font newF = oldF.deriveFont( (float)( oldF.getSize2D() * ( 1 / zoomMultiplicationFactor ) )  );
@@ -739,27 +752,18 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
         tempH *= (1 / zoomMultiplicationFactor);
         w = (int)Math.ceil( tempW );
         h = (int)Math.ceil( tempH );
-        for( int i = 0; i < states.size(); i++ ) {
-          State current = states.elementAt( i );
-          current.x *= (1 / zoomMultiplicationFactor);
-          current.y *= (1 / zoomMultiplicationFactor);
-        }
         this.repaint();
       }
     }
     else if( newLevel < zoomLevel ){
       for( int j = 0; j < (zoomLevel - newLevel); ++j ) {
         zoomLevel--;
+        currentZoomFactor *= zoomMultiplicationFactor;
         Font oldF = getFont();
         Font newF = oldF.deriveFont( (float)( oldF.getSize2D() * zoomMultiplicationFactor )  );
         setFont( newF );
         w *= ( zoomMultiplicationFactor );
         h *= ( zoomMultiplicationFactor );        
-        for( int i = 0; i < states.size(); i++ ) {
-          State current = states.elementAt( i );
-          current.x *= zoomMultiplicationFactor;
-          current.y *= zoomMultiplicationFactor;
-        }
         this.repaint();
       }
     }
