@@ -16,7 +16,7 @@ import javax.swing.DefaultListModel;
  * @author Owen F. Kellett
  * @version 1.0
  */
-public class SortedListModel extends DefaultListModel<Edge> {
+public class SortedListModel extends DefaultListModel {
   private static final long serialVersionUID = 7273332800366200363L;
 
   public SortedListModel() {
@@ -32,12 +32,12 @@ public class SortedListModel extends DefaultListModel<Edge> {
   public void addSortedElement( Edge e ) {
     int j = 0;
     for( j = 0; j < size(); j++ ) {
-      if((getElementAt(j)).fromState.stateName
+      if( ((Edge) getElementAt(j)).fromState.stateName
           .compareTo((e).fromState.stateName)< 0)
         ;
-      else if( ( getElementAt( j ) ).fromState.stateName
+      else if( ( (Edge)getElementAt( j ) ).fromState.stateName
           .compareTo( ( e ).fromState.stateName ) == 0 ) {
-        if( ( getElementAt( j ) ).oldChar < ( e ).oldChar )
+        if( ((Edge) getElementAt( j ) ).oldChar < ( e ).oldChar )
           ;
         else {
           add( j, e );

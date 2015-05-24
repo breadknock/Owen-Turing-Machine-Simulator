@@ -71,7 +71,7 @@ public class TuringMachineSimulator extends JPanel {
     zoomSlider.setSnapToTicks( true );
     zoomSlider.addChangeListener( graphpanel );
 
-    JList<Edge> transitions = new JList<Edge>( machine.transitions );
+    JList transitions = new JList( machine.transitions );
     transitions.setCellRenderer( new TransitionCellRenderer() );
     transitionspanel.setBorder( BorderFactory
         .createTitledBorder( "Transitions" ) );

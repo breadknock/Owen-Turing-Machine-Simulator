@@ -196,7 +196,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
       int j = 0;
       int total = 0;
       for( j = 0; j < transitions.size(); j++ ) {
-        Edge temp = transitions.elementAt( j );
+        Edge temp = (Edge) transitions.elementAt( j );
         if( temp == e ) break;
         if( temp.fromState == e.fromState && temp.fromState == temp.toState )
           total += h + 2;
@@ -215,7 +215,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
       int j = 0;
       boolean line = true;
       for( j = 0; j < transitions.size(); j++ ) {
-        Edge temp = transitions.elementAt( j );
+        Edge temp = (Edge) transitions.elementAt( j );
         if( temp == e ) break;
         if(  temp.fromState == e.fromState && temp.toState == e.toState  )
           line = false;
@@ -282,7 +282,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
     offgraphics.fillRect( 0, 0, d.width, d.height );
     FontMetrics fm = offgraphics.getFontMetrics();
     for(int i = 0; i < transitions.size(); i++ ) {
-      Edge e = transitions.elementAt( i );
+      Edge e = (Edge) transitions.elementAt( i );
       paintEdge( offgraphics, e, fm );
     }
 
@@ -299,7 +299,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
       int x = e.getX();
       int y = e.getY();
       for( int i = 0; i < transitions.size(); i++ ) {
-        Edge m = transitions.elementAt( i );
+        Edge m = (Edge) transitions.elementAt( i );
         if( mouseInEdge( m, x, y ) ) {
           NewTransitionDialog newTransition = new NewTransitionDialog( m,
               transitions, machine.machineType,
@@ -332,7 +332,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
         }
       }
       for( int i = 0; i < transitions.size(); i++ ) {
-        Edge m = transitions.elementAt( i );
+        Edge m = (Edge) transitions.elementAt( i );
         if( m.fromState.equals( destroy ) || m.toState.equals( destroy ) ) {
           transitions.removeElementAt( i );
           i--;
@@ -343,7 +343,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
       else {
         Edge gone = null;
         for( int i = 0; i < transitions.size(); i++ ) {
-          Edge n = transitions.elementAt( i );
+          Edge n = (Edge) transitions.elementAt( i );
           if( mouseInEdge( n, x, y ) ) gone = n;
         }
         if( gone != null ) transitions.removeElement( gone );
@@ -406,7 +406,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
       }
       if( pick == null ) {
         for( int i = 0; i < transitions.size(); i++ ) {
-          Edge n = transitions.elementAt( i );
+          Edge n = (Edge) transitions.elementAt( i );
           if( mouseInEdge( n, x, y ) ) {
             pickEdge = n;
             if( pickEdge.fromState.x < pickEdge.toState.x ) {
@@ -456,7 +456,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
         int x = e.getX();
         int y = e.getY();
         int i;
-        Edge current = transitions.lastElement();
+        Edge current = (Edge) transitions.lastElement();
         for( i = 0; i < states.size(); i++ ) {
           State n = states.elementAt( i );
           if( mouseIn( n, x, y ) ) {
@@ -569,7 +569,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
         }
       }
       for( int i = 0; i < transitions.size(); i++ ) {
-        Edge n = transitions.elementAt( i );
+        Edge n = (Edge) transitions.elementAt( i );
         if( mouseInEdge( n, x, y ) ) {
           n.highlight = true;
           setCursor( new Cursor( Cursor.HAND_CURSOR ) );
@@ -606,7 +606,7 @@ public class GraphPanel extends JPanel implements Runnable, MouseListener,
       int j = 0;
       int total = 0;
       for( j = 0; j < transitions.size(); j++ ) {
-        Edge temp = transitions.elementAt( j );
+        Edge temp = (Edge) transitions.elementAt( j );
         if( temp == e ) break;
         if( temp.fromState == e.fromState && temp.fromState == temp.toState )
           total += h + 2;

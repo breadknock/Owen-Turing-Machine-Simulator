@@ -40,7 +40,6 @@ public class MachineTypePicker extends JDialog {
 		okButton = new JButton("OK");
 		okButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
 				dispose();
 			}
 		});

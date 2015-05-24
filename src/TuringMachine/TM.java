@@ -43,7 +43,7 @@ public class TM implements Runnable {
   State currentState;
   Edge currentEdge;
   Vector<State> states;
-  DefaultListModel<Edge> transitions;
+  DefaultListModel transitions;
   MessagePanel messages;
   TransitionsPane transitionpanel;
   int machineType;
@@ -54,7 +54,7 @@ public class TM implements Runnable {
   
   
 
-  public void setTransitions( DefaultListModel<Edge> transitions ) {
+  public void setTransitions( DefaultListModel transitions ) {
     this.transitions = transitions;
   }
 
@@ -94,7 +94,7 @@ public class TM implements Runnable {
 
   public void clearEdge() {
     for( int j = 0; j < transitions.size(); j++ ) {
-      Edge n = transitions.elementAt( j );
+      Edge n = (Edge) transitions.elementAt( j );
       n.currentEdge = false;
     }
     currentEdge = null;
@@ -281,7 +281,7 @@ public class TM implements Runnable {
     Character currentChar;
     currentChar = new Character( currentCharTemp2 );
     for( int i = 0; i < transitions.size(); i++ ) {
-      fromTemp = transitions.elementAt( i );
+      fromTemp = (Edge) transitions.elementAt( i );
       if( fromTemp.fromState == currentState
           && fromTemp.oldChar == currentChar.charValue() ) {
         temp = temp

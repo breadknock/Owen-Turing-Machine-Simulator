@@ -241,7 +241,7 @@ public class TuringMachineFrame extends JFrame {
       machine.graphpanel.transitions = new SortedListModel();
       machine.graphpanel.machine.currentEdge = null;
       machine.graphpanel.machine.currentState = null;
-      JList<Edge> transitions = new JList<Edge>(machine.graphpanel.transitions);
+      JList transitions = new JList(machine.graphpanel.transitions);
       transitions.setCellRenderer(new TransitionCellRenderer());
       machine.graphpanel.transitionpanel.getViewport().setView(transitions);
       machine.machine.machineType = MachineTypePicker.getNewMachineType();

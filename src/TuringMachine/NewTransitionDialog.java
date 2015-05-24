@@ -44,7 +44,7 @@ public class NewTransitionDialog extends JDialog implements ActionListener, Docu
   JLabel moveDirection = new JLabel( "Move Direction" );
   JTextField oldCharText = new JTextField();
   JTextField newCharText = new JTextField( "NULL" );
-  JComboBox<String> directionPick = new JComboBox<String>();
+  JComboBox directionPick = new JComboBox();
   JButton ok = new JButton( "OK" );
   JButton cancel = new JButton( "Cancel" );
   Edge transition;
@@ -176,7 +176,7 @@ public class NewTransitionDialog extends JDialog implements ActionListener, Docu
     }
     if( !edit ) {
       for( int i = 0; i < transitions.size(); i++ ) {
-        Edge n = transitions.elementAt( i );
+        Edge n = (Edge) transitions.elementAt( i );
         if( n.fromState == transition.fromState ) {
           if( n.oldChar == oldCharText.getText().charAt( 0 ) ) {
             WarningBox temp = new WarningBox(

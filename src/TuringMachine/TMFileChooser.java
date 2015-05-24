@@ -13,6 +13,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.io.Writer;
+import java.io.IOException;
 import java.util.Random;
 import java.util.Vector;
 
@@ -138,7 +139,7 @@ public class TMFileChooser extends JFileChooser
       saver.writeInt(graphpanel.transitions.size());
       for(int i = 0; i < graphpanel.transitions.size(); i++)
       {
-        Edge e = graphpanel.transitions.elementAt(i);
+        Edge e = (Edge) graphpanel.transitions.elementAt(i);
         saver.writeChar(e.oldChar);
         saver.writeChar(e.newChar);
         saver.writeInt(e.direction);
@@ -202,7 +203,7 @@ public class TMFileChooser extends JFileChooser
       saver.println(";");
       for(int j = 0; j < graphpanel.transitions.size(); j++)
       {
-        Edge temp = graphpanel.transitions.elementAt(j);
+        Edge temp = (Edge) graphpanel.transitions.elementAt(j);
         saver.print(temp.fromState.stateName);
         saver.print(" -> ");
         if(temp.toState.finalState)
@@ -231,7 +232,7 @@ public class TMFileChooser extends JFileChooser
           State tempState = graphpanel.states.elementAt(j);
           for(int i = 0; i < graphpanel.transitions.size(); i++)
           {
-            Edge tempEdge = graphpanel.transitions.elementAt(i);
+            Edge tempEdge = (Edge) graphpanel.transitions.elementAt(i);
             if(tempEdge.fromState == tempState)
             {
               if(tempEdge.oldChar == '0')
@@ -342,7 +343,7 @@ public class TMFileChooser extends JFileChooser
        root.appendChild(transitions);
 
        for(int i = 0; i < graphpanel.transitions.size(); i++){
-           Edge temp = graphpanel.transitions.elementAt(i);
+           Edge temp = (Edge) graphpanel.transitions.elementAt(i);
            Element e = xmldoc.createElement("Transition_" + Integer.toString(i));
            transitions.appendChild(e);
            Element f = xmldoc.createElement("fromstate");
@@ -396,17 +397,17 @@ public class TMFileChooser extends JFileChooser
     catch(Exception e){e.printStackTrace();}
   }
 
-@SuppressWarnings("unchecked")
 public void openFile(File open)
   {
-	  graphpanel.machine.tape.editCellAt(-1, -1);
-      graphpanel.machine.tape.clearSelection();
-	  System.out.println(open.toString());
-    try (
-    	FileInputStream infile = new FileInputStream(open);
-    	ObjectInputStream opener = new ObjectInputStream(infile);
-    	)
+	graphpanel.machine.tape.editCellAt(-1, -1);
+    graphpanel.machine.tape.clearSelection();
+	System.out.println(open.toString());
+    FileInputStream infile = null;
+    ObjectInputStream opener = null;
+    try
     {
+   	  infile = new FileInputStream(open);
+      opener = new ObjectInputStream(infile);
       graphpanel.states = (Vector<State>)opener.readObject();
       int edges = opener.readInt();
       char oldChar;
@@ -454,7 +455,7 @@ public void openFile(File open)
       graphpanel.machine.currentState = null;
       graphpanel.machine.states = graphpanel.states;
       graphpanel.machine.transitions = graphpanel.transitions;
-      JList<Edge> transitions = new JList<Edge>(graphpanel.transitions);
+      JList transitions = new JList(graphpanel.transitions);
       transitions.setCellRenderer(new TransitionCellRenderer());
       graphpanel.transitionpanel.getViewport().setView(transitions);
       for(int k = 0; k < graphpanel.states.size(); k++)
@@ -464,7 +465,7 @@ public void openFile(File open)
         temp.highlight = false;
       }
       if(graphpanel.transitions.size() > 0) {
-    	  Edge e = graphpanel.transitions.elementAt(0);
+    	  Edge e = (Edge) graphpanel.transitions.elementAt(0);
     	  if(e.newChar == 0 || e.direction == TM.NULL) {
     		  graphpanel.machine.machineType = TM.QUADRUPLE;
     	  } else {
@@ -475,6 +476,16 @@ public void openFile(File open)
       }
     }
     catch(Exception e){e.printStackTrace();}
+    finally {
+      try {
+        if(infile != null) {
+          infile.close();
+        }
+        if(opener != null) {
+          opener.close();
+        }
+      } catch(IOException e) {}
+    }
   }
 
   public void openTMOFile(File open)
@@ -482,11 +493,10 @@ public void openFile(File open)
 	int tempIndexOne;
 	int tempIndexTwo;
 	String tempString;
-	//Try-with-resources
-    try(
-    	BufferedReader infile = new BufferedReader(new FileReader(open))
-    )
+    BufferedReader infile = null;
+    try
     {
+      infile = new BufferedReader(new FileReader(open));
       String text;
       boolean implicit = false;
 
@@ -595,7 +605,7 @@ public void openFile(File open)
       graphpanel.machine.currentState = null;
       graphpanel.machine.states = graphpanel.states;
       graphpanel.machine.transitions = graphpanel.transitions;
-      JList<Edge> transitions = new JList<Edge>(graphpanel.transitions);
+      JList transitions = new JList(graphpanel.transitions);
       transitions.setCellRenderer(new TransitionCellRenderer());
       graphpanel.transitionpanel.getViewport().setView(transitions);
       for(int k = 0; k < graphpanel.states.size(); k++)
@@ -607,6 +617,11 @@ public void openFile(File open)
     }
     catch(Exception e){e.printStackTrace();}
     finally {
+      try {
+        if(infile != null) {
+          infile.close();
+        }
+      } catch(IOException e) {}
     }
   }
 
@@ -734,7 +749,7 @@ public void openFile(File open)
       graphpanel.machine.currentState = null;
       graphpanel.machine.states = graphpanel.states;
       graphpanel.machine.transitions = graphpanel.transitions;
-      JList<Edge> transitions = new JList<Edge>(graphpanel.transitions);
+      JList transitions = new JList(graphpanel.transitions);
       transitions.setCellRenderer(new TransitionCellRenderer());
       graphpanel.transitionpanel.getViewport().setView(transitions);
       for(int k = 0; k < graphpanel.states.size(); k++)

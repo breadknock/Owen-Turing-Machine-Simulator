@@ -45,7 +45,7 @@ public class MessagePanel extends JPanel {
   JPanel optionspanel;
   JTextArea messages;
   JLabel currentState;
-  JComboBox<String> speed;
+  JComboBox speed;
   JLabel nonblanks;
   JLabel totaltransitions;
   JTextField inputString;
@@ -81,7 +81,7 @@ public class MessagePanel extends JPanel {
             stop = new JButton( "Stop" ),
             step = new JButton( "Step" );
     JLabel speedLabel = new JLabel( "Speed", JLabel.CENTER );
-    speed = new JComboBox<String>();
+    speed = new JComboBox();
     speed.addItem( "Slow" );
     speed.addItem( "Fast" );
     speed.addItem( "Very Fast" );
@@ -307,7 +307,7 @@ public class MessagePanel extends JPanel {
         }
         machine.currentEdge = null;
         for( int i = 0; i < machine.transitions.size(); i++ ) {
-          Edge n = machine.transitions.elementAt( i );
+          Edge n = (Edge) machine.transitions.elementAt( i );
           n.currentEdge = false;
         }
         machine.totalTransitions = 0;

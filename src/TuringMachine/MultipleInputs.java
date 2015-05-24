@@ -206,7 +206,7 @@ public class MultipleInputs extends JFrame {
         }
         machine.currentEdge = null;
         for( int x = 0; x < machine.transitions.size(); x++ ) {
-          Edge n = machine.transitions.elementAt( x );
+          Edge n = (Edge) machine.transitions.elementAt( x );
           n.currentEdge = false;
         }
         machine.totalTransitions = 0;
